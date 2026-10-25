@@ -1,4 +1,4 @@
-import RAPIER from './vendor/rapier.mjs';
+import RAPIER from './vendor/rapier.js';
 import * as THREE from 'three';
 import {V,SOLIDS,PAPER_SIZE,DESK_PAPER} from './desk-layout.js';
 let initialized;

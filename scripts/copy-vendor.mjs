@@ -19,7 +19,7 @@ await cp(path.join(three, 'build/three.core.js'), path.join(out, 'three.core.js'
 await cp(path.join(three, 'examples/jsm/loaders/GLTFLoader.js'), path.join(out, 'addons/loaders/GLTFLoader.js'));
 await cp(path.join(three, 'examples/jsm/utils/BufferGeometryUtils.js'), path.join(out, 'addons/utils/BufferGeometryUtils.js'));
 console.log('vendor ready:', out);
-await cp(path.join(root,'node_modules/@dimforge/rapier3d-compat/dist/rapier.mjs'),path.join(out,'rapier.mjs'));
+await cp(path.join(root,'node_modules/@dimforge/rapier3d-compat/dist/rapier.mjs'),path.join(out,'rapier.js'));
 await cp(path.join(root,'node_modules/@dimforge/rapier3d-compat/LICENSE'),path.join(out,'RAPIER-LICENSE'));
 await mkdir(path.join(out,'hanzi'),{recursive:true});
 for(const name of await readdir(path.join(root,'node_modules/hanzi-writer-data'))){if(name.endsWith('.json')&&[...name.replace('.json','')].length===1||name==='ARPHICPL.TXT')await cp(path.join(root,'node_modules/hanzi-writer-data',name),path.join(out,'hanzi',name));}

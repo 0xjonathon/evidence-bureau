@@ -22,7 +22,7 @@ for (const entry of await readdir(out)) await rm(path.join(out, entry), {recursi
 
 // 1. public/vendor must already hold three.js and friends. `npm ci && npm run build` creates it (copy-vendor.mjs);
 //    this script never deletes anything under public/, it only reads from it.
-for (const f of ['three.module.js', 'three.core.js', 'rapier.mjs']) {
+for (const f of ['three.module.js', 'three.core.js', 'rapier.js']) {
   if (!(await stat(at('public', 'vendor', f)).catch(() => null))) throw new Error(`public/vendor/${f} is missing. Run \`npm ci && npm run build\` first.`);
 }
 
@@ -34,7 +34,7 @@ await mkdir(path.join(out, 'assets'), {recursive: true});
 const ASSETS = ['instrument-v9.glb', 'bureau-room-v3.glb', 'detective-standard-v5.glb', 'detective-standard-v5.json', 'visitor-standard-v5.glb', 'visitor-standard-v5.json', 'bureau-preview.png', 'favicon.svg'];
 for (const a of ASSETS) await cp(at('public', 'assets', a), path.join(out, 'assets', a));
 await mkdir(path.join(out, 'vendor', 'addons'), {recursive: true});
-for (const f of ['three.module.js', 'three.core.js', 'rapier.mjs', 'RAPIER-LICENSE']) await cp(at('public', 'vendor', f), path.join(out, 'vendor', f));
+for (const f of ['three.module.js', 'three.core.js', 'rapier.js', 'RAPIER-LICENSE']) await cp(at('public', 'vendor', f), path.join(out, 'vendor', f));
 await cp(at('public', 'vendor', 'addons'), path.join(out, 'vendor', 'addons'), {recursive: true});
 
 // 3. Handwriting glyphs. All 9,574 are shipped: the user can type any claim, and code point order is not a
