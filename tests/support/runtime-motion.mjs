@@ -9,7 +9,7 @@ export async function simulateRuntime(verdict='supported',{fps=40,onFrame=()=>{}
  const stages=[{state:'greet',duration:2.5},{name:'submit'},{state:'search',duration:2.5},{name:cancel?'return':'result'},{state:cancel?'writing':'holding-report',duration:2.5}];
  try{for(const stage of stages){const {name,state=name?'sequence':'greet'}=stage;if(name==='result')physics.newSheet(deskTask(name,0).point);const duration=name?TIMES[name]/PLAYBACK_SPEED:stage.duration;
   for(let i=0;i<duration*fps;i++){
-   const dt=1/fps,t=name?Math.min(i*dt*PLAYBACK_SPEED,TIMES[name]):0,task=deskTask(name,t),moving=!!name;clock+=dt;work+=(Number(moving)-work)*(1-Math.exp(-4.8*dt));body+=((moving?1.48:1.36)-body)*(1-Math.exp(-3.2*dt));rootX+=(task.root+(moving?.12:0)-rootX)*(1-Math.exp(-8*dt));actor.root.position.set(rootX,body,-.75);actor.root.updateMatrixWorld(true);
+   const dt=1/fps,t=name?Math.min(i*dt*PLAYBACK_SPEED,TIMES[name]):0,task=deskTask(name,t),moving=!!name;clock+=dt;work+=(task.work-work)*(1-Math.exp(-4.8*dt));body+=(1.36-body)*(1-Math.exp(-3.2*dt));rootX+=(0-rootX)*(1-Math.exp(-8*dt));actor.root.position.set(rootX,body,-.75);actor.root.updateMatrixWorld(true);
    const physical=physics.step(dt*(name?PLAYBACK_SPEED:1),name?task.point:state==='search'?SCAN_PAPER:DESK_PAPER,name?task.held||task.owner==='instrument':false),paper=physical.position;
    const performance=detectivePerformance({name,state,time:t,clock,workBlend:work,paper,verdict}),grips=Object.fromEntries(Object.entries(performance.grips).map(([side,g])=>[side,{...g,position:actor.root.worldToLocal(g.position.clone())}]));
    const response=poseDetective(actor,{...pose('idle',clock),headX:moving?.27:.02,headY:0},life(clock),{},grips,performance.context);

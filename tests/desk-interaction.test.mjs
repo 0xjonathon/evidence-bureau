@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {simulateRuntime} from './support/runtime-motion.mjs';
 import {Quaternion} from 'three';
 import assert from 'node:assert/strict';
 import {createDeskPhysics} from '../public/desk-physics.js';
@@ -13,8 +14,16 @@ function localGrip(actor,p,forward=V(0,0,1),normal=V(0,1,0),kind=null,weight=1){
 test('the actual paper rigid body traverses the integrated chassis without blocked sweeps, including fast playback',async()=>{
  for(const speed of [1,5]){const physics=await createDeskPhysics();try{for(const name of ['submit','return','result']){physics.newSheet(name==='return'?SCAN_PAPER:name==='result'?deskTask(name,0).point:DESK_PAPER);let result;for(let t=0;t<TIMES[name]+1/120;t+=speed/120){const task=deskTask(name,Math.min(t,TIMES[name]));result=physics.step(speed/120,task.point,task.held||task.owner==='instrument');assert.ok(result.position.distanceTo(task.point)<.16,`${name}: paper failed to follow its collision-free path`);}assert.equal(result.blocked,0);assert.ok(result.position.distanceTo(deskTask(name,TIMES[name]).point)<.025);}}finally{physics.dispose();}}
 });
-test('the native skin and fingertips clear every desk/device volume while following the actual simulated paper',async()=>{
- for(const name of ['submit','return','result']){const{detective:d}=createActors(),vertices=skinVertices(d),physics=await createDeskPhysics();physics.newSheet(name==='return'?SCAN_PAPER:name==='result'?deskTask(name,0).point:DESK_PAPER);try{for(let frame=0;frame<TIMES[name]*30;frame++){const t=frame/30,task=deskTask(name,t),actual=physics.step(1/30,task.point,task.held||task.owner==='instrument');if(!task.held)continue;d.root.position.set(task.root,1.48,-.75);d.root.updateMatrixWorld(true);const c=carryingContact(name,actual.position);c.position=d.root.worldToLocal(c.position);const result=poseDetective(d,pose('idle',t),life(t),{}, {l:localGrip(d,V(-.47,1.85,-.14)),r:c},{state:'sequence',sequence:name,time:t,taskLean:.38,collision:true});assert.ok(result.miss<.002,`${name}/${t}: arm cannot reach`);assert.ok(d.arms.r.wristBend<=Math.PI*32/180+.001,`${name}/${t}: wrist over-bent`);d.root.updateMatrixWorld(true);assertOutside(vertices,`${name}/${t}`);}}finally{physics.dispose();}}
+test('the rendered native skin and sleeves clear every desk/device volume throughout the actual runtime sequence',async()=>{
+ // Exercise the same body lean, hand transitions, physical paper and IK as scene.js.
+ // The former isolated carry test bypassed those layers and missed visible intersections.
+ for(const cancel of [false,true]){
+  let vertices;
+  await simulateRuntime('supported',{fps:30,cancel,onFrame:({actor,name,state,t})=>{
+   if(!vertices){vertices=skinVertices(actor);actor.model.traverse(mesh=>{if(!mesh.isSkinnedMesh||/SKIN/.test(mesh.material?.name||''))return;const g=mesh.geometry,ids=new Set(mesh.skeleton.bones.map((b,i)=>/UpperArm|LowerArm|Hand/.test(b.name)?i:-1)),indices=[];for(let i=0;i<g.attributes.position.count;i++){let weight=0;for(let j=0;j<4;j++)if(ids.has(g.attributes.skinIndex.getComponent(i,j)))weight+=g.attributes.skinWeight.getComponent(i,j);if(weight>.65)indices.push(i);}if(indices.length)vertices.push({mesh,vertices:indices});});}
+   assertOutside(vertices,`${name||state}/${t}`);
+  }});
+ }
 });
 
 test('stamp and pen contact the report at the work station with reachable, collision-free native hands',()=>{

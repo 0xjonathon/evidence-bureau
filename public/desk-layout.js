@@ -22,25 +22,26 @@ export const SOLIDS=[
  {name:'instrument-output',p:V(1.46,1.686,.66),size:V(1.04,.016,.92)},
 ];
 for(const solid of SOLIDS)if(solid.name.startsWith('instrument-'))solid.p.z-=.40;
-export const PLAYBACK_SPEED=1.8;
-export const TIMES={onboard:2.6,submit:8.5,return:8,result:18.4};
+export const PLAYBACK_SPEED=1.2;
+export const TIMES={onboard:2.6,submit:8.5,return:9.2,result:18.4};
 export const smooth=(t,a,b)=>{const x=THREE.MathUtils.clamp((t-a)/(b-a),0,1);return x*x*x*(10+x*(-15+x*6));};
 export function path(t,keys){for(let i=1;i<keys.length;i++)if(t<=keys[i][0])return keys[i-1][1].clone().lerp(keys[i][1],smooth(t,keys[i-1][0],keys[i][0]));return keys.at(-1)[1].clone();}
 export function deskTask(name,t){
  let point=DESK_PAPER.clone(),held=false,owner='desk',root=0,grip=0;
  if(name==='submit'){
-  point=path(t,[[0,DESK_PAPER],[1.8,DESK_PAPER],[3,V(0,2.43,.90)],[3.9,V(1.46,2.43,.78)],[5.45,V(1.46,2.43,-.60)],[6.15,SCAN_PAPER],[8.5,SCAN_PAPER]]);
+  point=path(t,[[0,DESK_PAPER],[1.8,DESK_PAPER],[3,V(0,2.43,.60)],[3.9,V(1.46,2.43,.50)],[5.45,V(1.46,2.43,-.60)],[6.15,SCAN_PAPER],[8.5,SCAN_PAPER]]);
   held=t>=1.4&&t<6.35;grip=smooth(t,.35,1.4)*(1-smooth(t,6.35,6.65));owner=t<1.4?'desk':t<6.35?'detective':'instrument';root=.12*smooth(t,2.6,4.2)*(1-smooth(t,6.45,8));
  }
  if(name==='return'){
-  point=path(t,[[0,SCAN_PAPER],[1.3,SCAN_PAPER],[2.4,V(1.46,2.43,-.60)],[3.9,V(1.46,2.43,.78)],[5.0,V(0,2.43,.90)],[6.7,DESK_PAPER],[8,DESK_PAPER]]);
-  held=t>=1&&t<6.95;grip=smooth(t,0,1)*(1-smooth(t,6.95,7.6));owner=t<1?'instrument':t<6.95?'detective':'desk';root=.12*(1-smooth(t,2.7,4.1));
+  point=path(t,[[0,SCAN_PAPER],[2.5,SCAN_PAPER],[3.6,V(1.46,2.43,-.60)],[5.1,V(1.46,2.43,.50)],[6.2,V(0,2.43,.60)],[7.9,DESK_PAPER],[9.2,DESK_PAPER]]);
+  held=t>=2.2&&t<8.15;grip=smooth(t,1.4,2.2)*(1-smooth(t,8.15,8.8));owner=t<2.2?'instrument':t<8.15?'detective':'desk';root=.12*(1-smooth(t,3.9,5.3));
  }
  if(name==='result'){
-  point=path(t,[[0,V(1.46,1.699,-.72)],[2.1,PRINTER_PAPER],[3.3,PRINTER_PAPER],[4.4,V(1.46,2.43,.78)],[5.8,V(-.30,2.43,.90)],[7,REPORT_STATION],[14.3,REPORT_STATION],[15.25,V(-.30,1.85,.60)],[16.4,V(0,1.85,.60)],[17.5,DESK_PAPER],[18.4,DESK_PAPER]]);
+  point=path(t,[[0,V(1.46,1.699,-.72)],[2.1,PRINTER_PAPER],[3.3,PRINTER_PAPER],[4.4,V(1.46,2.43,.50)],[5.8,V(-.30,2.43,.60)],[7,REPORT_STATION],[14.3,REPORT_STATION],[15.25,V(-.30,1.85,.60)],[16.4,V(0,1.85,.60)],[17.5,DESK_PAPER],[18.4,DESK_PAPER]]);
   held=t>=3.1&&t<7.25||t>=14.05&&t<17.75;grip=smooth(t,2.2,3.1)*(1-smooth(t,7.25,7.9))+smooth(t,13.2,14.05)*(1-smooth(t,17.75,18.3));owner=t<3.1?'instrument':held?'detective':'desk';root=0;
  }
- return {point,held,owner,root,grip,lid:0,stamp:name==='result'?smooth(t,10,10.7)*(1-smooth(t,11.1,12)):0,progress:name==='submit'?smooth(t,6.7,8.4):0};
+ const work=name&&name!=='onboard'?smooth(t,0,1.2)*(1-smooth(t,TIMES[name]-1,TIMES[name])):0;
+ return {point,held,owner,root,grip,work,lid:0,stamp:name==='result'?smooth(t,10,10.7)*(1-smooth(t,11.1,12)):0,progress:name==='submit'?smooth(t,6.7,8.4):0};
 }
 export function pointBoxDistance(p,solid){return Math.hypot(...['x','y','z'].map(k=>Math.max(0,Math.abs(p[k]-solid.p[k])-solid.size[k]/2)));}
 export function limbClearanceReport(a,b,radius,solids=SOLIDS){let clearance=Infinity,solid=null,point=null;for(const o of solids)for(let i=0;i<=28;i++){const p=a.clone().lerp(b,i/28),d=pointBoxDistance(p,o)-radius;if(d<clearance){clearance=d;solid=o.name;point=p;}}return {clearance,solid,point};}

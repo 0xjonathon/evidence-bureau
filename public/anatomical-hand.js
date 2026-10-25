@@ -34,7 +34,9 @@ export function poseHand(arm,kind='relaxed',weight=1){
  if(!arm.hinges)prepareHand(arm);
  if(['pen','stamp','pinch'].includes(kind)){
   if(!arm.handPoses.has(kind))arm.handPoses.set(kind,buildPose(arm,kind));
-  const p=arm.handPoses.get(kind),blended=p.angles.map((a,i)=>{if(kind==='pen'&&i>=6&&i<15)a+=([.08,.15,.10][i%3]-a)*(arm.toolFlatness??0);const relaxed=i<3?[.16,.10,.06][i]:i<15?[.10,.16,.10][i%3]:0;return relaxed+(a-relaxed)*weight;});apply(arm,blended);arm.graspAnchor=p.anchor;arm.fingerAngles=blended;return p.anchor;
+  const p=arm.handPoses.get(kind);
+  let baseAngles=null;if(arm.transitionBase){poseHand(arm,arm.transitionBase.kind,arm.transitionBase.weight);baseAngles=arm.fingerAngles.slice();}
+  const blended=p.angles.map((a,i)=>{if(kind==='pen'&&i>=6&&i<15)a+=([.08,.15,.10][i%3]-a)*(arm.toolFlatness??0);const relaxed=baseAngles?.[i]??(i<3?[.16,.10,.06][i]:i<15?[.10,.16,.10][i%3]:0);return relaxed+(a-relaxed)*weight;});apply(arm,blended);arm.graspAnchor=p.anchor;arm.fingerAngles=blended;return p.anchor;
  }
  const angles=Array(17).fill(0);for(let f=0;f<5;f++)for(let j=0;j<3;j++)angles[f*3+j]=f===0?[.16,.1,.06][j]:kind==='chin'?[1.05,1.35,.80][j]:kind==='tap'?(f===1?[.35,.20,.10][j]:[.90,1.25,.80][j]):[.10,.16,.10][j];if(kind==='chin'){angles[0]=.45;angles[1]=.35;angles[2]=.25;angles[15]=arm.semantic==='right'?-.45:.45;angles[16]=arm.semantic==='right'?-.30:.30;}if(kind==='chin'||kind==='tap'){for(let f=0;f<5;f++)for(let j=0;j<3;j++){const relaxed=f===0?[.16,.10,.06][j]:[.10,.16,.10][j];angles[f*3+j]=relaxed+(angles[f*3+j]-relaxed)*weight;}angles[15]*=weight;angles[16]*=weight;}apply(arm,angles);arm.fingerAngles=angles;arm.graspAnchor=null;return arm.palm;
 }

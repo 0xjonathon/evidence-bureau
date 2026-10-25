@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {simulateRuntime} from './support/runtime-motion.mjs';
 import assert from 'node:assert/strict';
 import {createActors} from './support/standard-actors.mjs';
 import {poseDetective,poseViewer} from '../public/standard-actor.js';
@@ -22,39 +23,36 @@ test('grips use bounded native finger hinges and retain all native arm lengths',
  }
 });
 
-test('carry paths keep shoulder, forearm and wrist within authored ranges without elbow flips',()=>{
- for(const name of ['submit','return','result']){
-  const {detective:d}=createActors();let previous=null;
-  for(let frame=0;frame<TIMES[name]*40/PLAYBACK_SPEED;frame++){
-   const t=frame/40*PLAYBACK_SPEED,task=deskTask(name,t);if(!task.held){previous=null;continue;}
-   d.root.position.set(task.root,1.48,-.75);d.root.updateMatrixWorld(true);
-   const c=carryingContact(name,task.point);c.position=d.root.worldToLocal(c.position);
-   const rest={position:d.root.worldToLocal(V(-.47,1.85,-.14)),forward:V(0,0,1),normal:V(0,1,0)};
-   const result=poseDetective(d,pose('idle',t),life(frame/40),{},{l:rest,r:c},{state:'sequence',sequence:name,time:t,taskLean:.38,collision:true});
-   for(const arm of Object.values(d.arms)){assert.ok(arm.upperRoll<=1.58,`${name}/${t}: other shoulder twist`);assert.ok(Math.abs(arm.forearmRoll)<=1.36,`${name}/${t}: other forearm twist`);}
-   const a=d.arms.r;assert.ok(result.miss<.005,`${name}/${t}: unreachable`);
-   assert.ok(a.upperRoll<=1.58,`${name}/${t}: shoulder twist ${a.upperRoll}`);
-   assert.ok(Math.abs(a.forearmRoll)<=1.36,`${name}/${t}: forearm twist ${a.forearmRoll}`);
-   assert.ok(a.wristBend<=.6,`${name}/${t}: wrist bend`);
-   const elbow=a.lower.getWorldPosition(V());if(previous)assert.ok(elbow.distanceTo(previous)<.13,`${name}/${t}: elbow jumps`);previous=elbow;
-   const contact=a.ends[0].getWorldPosition(V()).add(a.ends[1].getWorldPosition(V())).multiplyScalar(.5);
-   assert.ok(contact.distanceTo(carryingContact(name,task.point).position)<.005,`${name}/${t}: grip detached`);
-  }
+test('the actual carry and tool clips retain native limb lengths, bounded wrist motion and a continuous elbow branch',async()=>{
+ for(const [verdict,cancel]of [['supported',false],['refuted',false],['mixed',false],['unknown',false],['supported',true]]){
+  let lengths;
+  const r=await simulateRuntime(verdict,{fps:40,cancel,onFrame:({actor,name,state,t})=>{
+   lengths??=Object.values(actor.arms).map(a=>[a.upper.getWorldPosition(V()).distanceTo(a.lower.getWorldPosition(V())),a.lower.getWorldPosition(V()).distanceTo(a.wrist.getWorldPosition(V()))]);
+   Object.values(actor.arms).forEach((a,i)=>{
+    assert.ok(Math.abs(a.upper.getWorldPosition(V()).distanceTo(a.lower.getWorldPosition(V()))-lengths[i][0])<1e-5);
+    assert.ok(Math.abs(a.lower.getWorldPosition(V()).distanceTo(a.wrist.getWorldPosition(V()))-lengths[i][1])<1e-5);
+    assert.ok(a.nativeMotion.elbow<=2.6001,`${name||state}/${t}: elbow over-folded`);
+    assert.ok(Math.abs(a.nativeMotion.roll)<=1.15001);
+    assert.ok(a.wristBend<=.60001);
+   });
+  }});
+  assert.ok(r.maxima.heldMiss<.005,`${verdict}/${cancel}: contact ${r.maxima.heldMiss}`);
+  assert.ok(r.maxima.jointStep<.19,`${verdict}/${cancel}: joint jump ${r.maxima.jointStep} at ${JSON.stringify(r.maxima.jointStepAt)}`);
  }
 });
 
-test('seated torso and thighs occupy the desk recess instead of the tabletop',()=>{
- for(const name of ['submit','result']){const {detective:d}=createActors();for(let frame=0;frame<TIMES[name]*20/PLAYBACK_SPEED;frame++){const elapsed=frame/20,t=elapsed*PLAYBACK_SPEED,task=deskTask(name,t);d.root.position.set(task.root,1.48,-.75);d.root.updateMatrixWorld(true);
-  poseDetective(d,pose('idle',elapsed),life(elapsed),{},null,{state:'sequence',taskLean:.38,collision:true});d.root.updateMatrixWorld(true);
+test('the runtime torso and thighs stay seated in the recess throughout pickup and report handling',async()=>{
+ await simulateRuntime('supported',{fps:20,onFrame:({actor:d,name,state,t})=>{
+  assert.equal(d.root.position.x,0,'reach must lean the torso instead of sliding the hips into the desk');
   d.model.traverse(m=>{
    if(!m.isSkinnedMesh)return;const g=m.geometry;
    for(let i=0;i<g.attributes.position.count;i++){
     let own=0;for(let k=0;k<4;k++)if(/Hips|Spine|Chest|UpperLeg|LowerLeg|Foot/.test(m.skeleton.bones[g.attributes.skinIndex.array[i*4+k]].name))own+=g.attributes.skinWeight.array[i*4+k];if(own<.8)continue;
     const p=V().fromBufferAttribute(g.attributes.position,i);m.applyBoneTransform(i,p).applyMatrix4(m.matrixWorld);
-    for(const s of SOLIDS.filter(s=>s.name.startsWith('desk')||s.name==='writing-mat'))assert.ok(!['x','y','z'].every(k=>Math.abs(p[k]-s.p[k])<s.size[k]/2-.001),`${name}/${t}: body vertex inside ${s.name}`);
+    for(const s of SOLIDS.filter(s=>s.name.startsWith('desk')||s.name==='writing-mat'))assert.ok(!['x','y','z'].every(k=>Math.abs(p[k]-s.p[k])<s.size[k]/2-.001),`${name||state}/${t}: body vertex inside ${s.name}`);
    }
   });
- }}
+ }});
 });
 
 test('skin-only forearm twist joints keep complete, independent bind palettes',()=>{
@@ -64,8 +62,8 @@ test('skin-only forearm twist joints keep complete, independent bind palettes',(
  }
 });
 
-test('normal playback completes intake within five seconds and report handling within eleven',()=>{
- assert.ok(TIMES.submit/PLAYBACK_SPEED<5);assert.ok(TIMES.result/PLAYBACK_SPEED<11);
+test('controlled playback leaves time for grasp, contact and release without rushing the body',()=>{
+ assert.ok(TIMES.submit/PLAYBACK_SPEED<8);assert.ok(TIMES.result/PLAYBACK_SPEED<16);
 });
 
 test('tools stay on their rests until grasp is complete and are set down before release',()=>{

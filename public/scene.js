@@ -19,6 +19,7 @@ export async function createOffice(container,onObject){
  renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
  renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.13;container.append(renderer.domElement);
  const scene=new THREE.Scene();scene.background=new THREE.Color('#14241f');scene.fog=new THREE.FogExp2('#14241f',.015);
+ container.dataset.motionVersion='12';
  const camera=new THREE.PerspectiveCamera(46,innerWidth/innerHeight,.06,70);
  scene.add(new THREE.HemisphereLight('#e5e9df','#233129',1.65));
  const key=new THREE.DirectionalLight('#ffe5c5',2.5);key.position.set(-3,6,5);key.castShadow=true;key.shadow.mapSize.set(2048,2048);Object.assign(key.shadow.camera,{left:-6,right:6,top:6,bottom:-4});key.shadow.normalBias=.008;scene.add(key);
@@ -81,7 +82,7 @@ export async function createOffice(container,onObject){
  if(new URLSearchParams(location.search).has('motionReview')){
   welcome.style.display='none';
   const controls=document.createElement('section');controls.setAttribute('aria-label','动作审查');Object.assign(controls.style,{position:'fixed',left:'20px',top:'85px',zIndex:9999,background:'#152a24',padding:'12px',display:'flex',gap:'8px',color:'white'});
-  for(const [label,name,verdict]of [['检查取单','submit'],['检查盖章','result','supported'],['检查画叉','result','refuted'],['检查批注','result','mixed']]){const button=document.createElement('button');button.textContent=label;button.onclick=()=>{if(verdict)setReport({verdict,claim:'动作审查',sources:[]});reviewPaused=true;playSequence(name);physics.newSheet(deskTask(name,0).point);reviewRange.max=TIMES[name];reviewRange.value=0;};controls.append(button);}
+  for(const [label,name,verdict]of [['检查取单','submit'],['检查撤回','return'],['检查盖章','result','supported'],['检查画叉','result','refuted'],['检查批注','result','mixed']]){const button=document.createElement('button');button.textContent=label;button.onclick=()=>{if(verdict)setReport({verdict,claim:'动作审查',sources:[]});reviewPaused=true;playSequence(name);physics.newSheet(deskTask(name,0).point);reviewRange.max=TIMES[name];reviewRange.value=0;};controls.append(button);}
   const angle=document.createElement('button');angle.textContent='正面 / 侧面';angle.onclick=()=>reviewSide=!reviewSide;controls.append(angle);
   const toggle=document.createElement('button');toggle.textContent='播放 / 暂停';toggle.onclick=()=>reviewPaused=!reviewPaused;controls.append(toggle);
   reviewRange=document.createElement('input');reviewRange.type='range';reviewRange.min=0;reviewRange.max=18.4;reviewRange.step=.05;reviewRange.setAttribute('aria-label','动作时间');reviewRange.oninput=()=>{if(seq){reviewPaused=true;det.resetPose=true;seq.t=Number(reviewRange.value);physics.newSheet(deskTask(seq.name,seq.t).point);}};controls.append(reviewRange);document.body.append(controls);
@@ -90,7 +91,7 @@ export async function createOffice(container,onObject){
  function resize(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();}resize();window.addEventListener('resize',resize);
  function projectTerminal(){if(state!=='search')return;const a=equipment.screen.getWorldPosition(V()).project(camera),x=(a.x*.5+.5)*innerWidth,y=(-a.y*.5+.5)*innerHeight,w=innerWidth<650?innerWidth*.90:Math.min(470,innerWidth*.40),left=innerWidth<650?innerWidth*.05:Math.min(innerWidth-w-32,Math.max(innerWidth*.48,x-w*.5)),top=innerWidth<650?innerHeight*.38:Math.max(115,y-355);Object.assign(panel.style,{left:left+'px',top:top+'px',width:w+'px'});panel.style.setProperty('--origin-x',(x-left)+'px');panel.style.setProperty('--origin-y',(y-top)+'px');const r=panel.getBoundingClientRect();projection.querySelector('.projection-beam').setAttribute('d',`M${x-23} ${y} L${r.left+20} ${r.bottom} L${r.right-20} ${r.bottom} L${x+23} ${y} Z`);projection.querySelector('.projection-wire').setAttribute('d',`M${x} ${y} L${r.left+20} ${r.bottom}`);projection.querySelector('circle').setAttribute('cx',x);projection.querySelector('circle').setAttribute('cy',y);}
  function render(now){
-  if(disposed)return;raf=requestAnimationFrame(render);if(document.hidden||now-last<1000/40)return;const dt=Math.min((now-last)/1000,.07);last=now;clock+=dt;
+  if(disposed)return;raf=requestAnimationFrame(render);if(document.hidden){last=now;return;}const dt=Math.min((now-last)/1000,.07);last=now;clock+=dt;
   const active=seq;if(active)active.t=Math.min(TIMES[active.name],active.t+(reviewPaused?0:dt)*active.speed);if(reviewRange&&active&&!reviewPaused)reviewRange.value=active.t;const t=active?.t||0,task=deskTask(active?.name,t);
   const puttingDown=active?.name==='submit'&&t<1.15;const overhead=state==='writing'||active?.name==='onboard'||puttingDown;view=THREE.MathUtils.damp(view,overhead?1:0,3.8,dt);
   // The visitor stays seated in world space; only the viewpoint bends down toward the sheet.
@@ -101,8 +102,8 @@ export async function createOffice(container,onObject){
   paper.visible=true;
   outline.visible=state==='greet';outline.material.opacity=.28+.34*(.5+.5*Math.sin(clock*2.4));
   equipment.update(task,active?.name==='submit'&&t>6.65);container.dataset.scanProgress=String(Math.round(task.progress*100));
-  const moving=!!active&&active.name!=='onboard',aimY=moving?1.48:1.36;bodyY=THREE.MathUtils.damp(bodyY,aimY,3.2,dt);rootX=THREE.MathUtils.damp(rootX,task.root+(moving?.12:0),8,dt);bodyZ=THREE.MathUtils.damp(bodyZ,-.75,4,dt);det.root.position.set(rootX,bodyY,bodyZ);det.root.updateMatrixWorld(true);
-  workBlend=THREE.MathUtils.damp(workBlend,moving?1:0,4.8,dt);
+  const moving=!!active&&active.name!=='onboard',aimY=1.36;bodyY=THREE.MathUtils.damp(bodyY,aimY,3.2,dt);rootX=THREE.MathUtils.damp(rootX,0,8,dt);bodyZ=THREE.MathUtils.damp(bodyZ,-.75,4,dt);det.root.position.set(rootX,bodyY,bodyZ);det.root.updateMatrixWorld(true);
+  workBlend=THREE.MathUtils.damp(workBlend,task.work,4.8,dt);
   const p=clipPose('idle',clock);p.headX=.02;p.headY=0;
   let annotationTip=null;
   if(active?.name==='result'&&['mixed','unknown'].includes(report?.verdict)){const stroke=annotation.render(ctx);if(stroke.tip)annotationTip=sheetPoint(20+stroke.tip.x,290+stroke.tip.y,.004+stroke.tip.lift);}
@@ -139,7 +140,7 @@ export async function createOffice(container,onObject){
    visitorPen.quaternion.setFromUnitVectors(UP,V(.12,0,-1).normalize()).slerp(new THREE.Quaternion().setFromUnitVectors(UP,axis),take);vr=penGripPoint(visitorPen.position,UP.clone().applyQuaternion(visitorPen.quaternion));kind='pen';frame={forward:V(0,0,-1),normal:UP,wristFlex:penWristFlex(UP.clone().applyQuaternion(visitorPen.quaternion)),flatness:penFlatness(UP.clone().applyQuaternion(visitorPen.quaternion))};
   }
   if(puttingDown){const release=visitorPutdown(t,active.penStart,active.penQ);visitorPen.position.copy(release.position);visitorPen.quaternion.copy(release.q);vr=release.right;vl=release.left;kind=release.kind;gripWeight=release.gripWeight;frame=release.frame;}
-  const viewerMiss=poseViewer(viewer,{l:vl,r:vr},{l:.5,r:.5},false,null,null,{clock,state,kind,gripWeight,rightFrame:frame,leftFrame:{forward:V(0,0,-1),normal:UP},collision:true});
+  const viewerMiss=viewer.root.visible?poseViewer(viewer,{l:vl,r:vr},{l:.5,r:.5},false,null,null,{clock,state,kind,gripWeight,rightFrame:frame,leftFrame:{forward:V(0,0,-1),normal:UP},collision:true}):0;
   // Match the bent paper edge to the finger pickup contact, flatten it in the feed channel.
   const curl=moving?task.grip*.16:state==='greet'?.006:0,positions=paperGeometry.attributes.position;for(let i=0;i<positions.count;i++)positions.setZ(i,curl*Math.exp(-Math.pow(positions.getX(i)/.22,4))*Math.pow(Math.max(0,positions.getY(i)/.30),6));positions.needsUpdate=true;paper.updateMatrixWorld(true);
   if(writing)projectSheet(paperDOM,paper,camera,innerWidth,innerHeight);

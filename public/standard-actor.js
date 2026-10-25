@@ -10,7 +10,7 @@ function anatomicalFrame(forward,normal){const y=forward.clone().normalize(),x=y
 let assets,metadata;
 export function installCharacterAssets(models,meta){assets=models;metadata=meta;}
 function boneMap(scene,human){return Object.fromEntries(Object.entries(human).map(([name,node])=>[name,scene.getObjectByName(node)]));}
-function rotationWorld(bone,q){const parent=bone.parent.getWorldQuaternion(Q());bone.quaternion.copy(parent.invert().multiply(q));bone.updateWorldMatrix(true,true);}
+function rotationWorld(bone,q){const parent=bone.parent.getWorldQuaternion(Q());bone.quaternion.copy(parent.invert().multiply(q)).normalize();bone.updateWorldMatrix(true,true);}
 function addWorldRotation(bone,axis,angle){rotationWorld(bone,Q().setFromAxisAngle(axis,angle).multiply(bone.getWorldQuaternion(Q())));}
 function solve(shoulder,wrist,a,b,pole){
  const dir=wrist.clone().sub(shoulder),d=THREE.MathUtils.clamp(dir.length(),Math.abs(a-b)+.0001,a+b-.0001);dir.normalize();const bend=pole.clone().sub(shoulder).addScaledVector(dir,-pole.clone().sub(shoulder).dot(dir)).normalize();const x=(a*a-b*b+d*d)/(2*d),y=Math.sqrt(Math.max(0,a*a-x*x));return {elbow:shoulder.clone().addScaledVector(dir,x).addScaledVector(bend,y),wrist:shoulder.clone().addScaledVector(dir,d)};
@@ -36,6 +36,8 @@ function prepareHumanoidRest(actor){
  const mixer=new THREE.AnimationMixer(actor.model),clip=actor.animations.find(c=>c.name==='Sitting_Idle_Loop');mixer.clipAction(clip).play();mixer.update(.1);actor.root.updateMatrixWorld(true);
  for(const arm of Object.values(actor.arms)){
   const s=arm.upper.getWorldPosition(V()),e=arm.lower.getWorldPosition(V()),w=arm.wrist.getWorldPosition(V()),u=e.clone().sub(s).normalize(),f=w.clone().sub(e).normalize(),h=u.clone().cross(f).normalize().multiplyScalar(arm.semantic==='right'?1:-1);
+  arm.upperFrame=arm.upper.getWorldQuaternion(Q()).invert().multiply(anatomicalFrame(u,h));
+  arm.lowerFrame=arm.lower.getWorldQuaternion(Q()).invert().multiply(anatomicalFrame(f,h));
   arm.nativeRestSeed={upper:arm.upper.quaternion.clone(),elbow:u.angleTo(f),roll:0,flex:0,deviation:0};
  }
  mixer.stopAllAction();mixer.uncacheRoot(actor.model);for(const {b,p,q,s}of saved){b.position.copy(p);b.quaternion.copy(q);b.scale.copy(s);}actor.root.updateMatrixWorld(true);
@@ -60,7 +62,7 @@ function build(role){
  const actor={role,root,group:root,model,bones,animations:loaded.animations};
  if(role==='detective'){model.scale.setScalar(3.06);model.position.set(0,-3.6875,.125);model.rotation.y=Math.PI;}
  else{model.scale.setScalar(2.2);model.updateMatrixWorld(true);const shoulderHeight=bones.leftUpperArm.getWorldPosition(V()).y/2.2;model.position.y=-shoulderHeight*2.2-.55;model.traverse(o=>{if(o.isMesh){if(!(o.isSkinnedMesh&&/Body/.test(o.name))||/HAIR|AccessoryNeck/.test(o.material?.name||''))o.visible=false;else{const g=o.geometry,idx=g.index.array,si=g.attributes.skinIndex,sw=g.attributes.skinWeight,headBones=new Set(o.skeleton.bones.map((b,i)=>/Head|Neck/.test(b.name)?i:-1).filter(i=>i>=0)),keep=[];const ownHead=i=>{let n=0;for(let k=0;k<4;k++)if(headBones.has(si.array[i*4+k]))n+=sw.array[i*4+k];return n>.20;};for(let i=0;i<idx.length;i+=3)if(!ownHead(idx[i])&&!ownHead(idx[i+1])&&!ownHead(idx[i+2]))keep.push(idx[i],idx[i+1],idx[i+2]);o.geometry=g.clone();o.geometry.setIndex(keep);}}});}
- root.updateMatrixWorld(true);actor.arms={l:makeArm(actor,'l',role==='detective'?'right':'left'),r:makeArm(actor,'r',role==='detective'?'left':'right')};actor.head=bones.head;actor.torso=bones.chest;if(role==='detective')prepareHumanoidRest(actor);for(const arm of Object.values(actor.arms)){prepareHand(arm);if(role==='detective'){poseHand(arm,'pinch',0);arm.defaultAnchor=arm.graspAnchor.clone();poseHand(arm,'relaxed');}installForearmTwist(actor,arm);}if(role==='detective')installVolumeSkinning(actor);prepareSkinContacts(actor);actor.motion=motion(actor);return actor;
+ root.updateMatrixWorld(true);actor.arms={l:makeArm(actor,'l',role==='detective'?'right':'left'),r:makeArm(actor,'r',role==='detective'?'left':'right')};actor.head=bones.head;actor.torso=bones.chest;prepareHumanoidRest(actor);for(const arm of Object.values(actor.arms)){prepareHand(arm);if(role==='detective'){poseHand(arm,'pinch',0);arm.defaultAnchor=arm.graspAnchor.clone();poseHand(arm,'relaxed');}installForearmTwist(actor,arm);}if(role==='detective')installVolumeSkinning(actor);prepareSkinContacts(actor);actor.motion=motion(actor);return actor;
 }
 export function buildDetective(){return build('detective');}
 export function buildViewer(){return build('visitor');}
@@ -78,13 +80,17 @@ function orientedStampPlan(actor,arm,anchor,point,scale,shoulder,a,b,preferred,c
  return chosen;
 }
 function reach(actor,arm,anchor,forward,normal,pole,tip=false,kind=null,collision=false,diagnostics=null){
- const scale=arm.wrist.getWorldScale(V()),tipWeight=typeof tip==='number'?tip:tip?1:0,point=(kind&&arm.graspAnchor?(arm.restPoint||arm.defaultAnchor||arm.palm).clone().lerp(arm.graspAnchor,arm.anchorBlend??arm.gripWeight??1):(arm.restPoint||arm.defaultAnchor||arm.palm).clone()).lerp(arm.wrist.worldToLocal(arm.end.getWorldPosition(V())),tipWeight);
+ const scale=arm.wrist.getWorldScale(V()),tipWeight=typeof tip==='number'?tip:tip?1:0;
+ const point=(arm.restPoint||arm.defaultAnchor||arm.palm).clone().lerp(arm.wrist.worldToLocal(arm.end.getWorldPosition(V())),tipWeight);
+ if(kind&&arm.graspAnchor)point.lerp(arm.graspAnchor,arm.anchorBlend??arm.gripWeight??1);
  const shoulder=arm.upper.getWorldPosition(V()),a=shoulder.distanceTo(arm.lower.getWorldPosition(V())),b=arm.lower.getWorldPosition(V()).distanceTo(arm.wrist.getWorldPosition(V()));
+ if(actor.useHumanoidIK&&!arm.nativeMotion)seedHumanoidArm(arm);
  if(actor.useHumanoidIK&&arm.nativeMotion){
   arm.orientationGoal=!kind?frameQuat(arm,forward,normal):null;arm.orientationStrength=!kind?3:0;
   if(kind==='stamp'){const aim=anchor.clone().sub(shoulder);aim.y=0;aim.normalize();const shaft=V(0,arm.semantic==='right'?-1:1,0),goal=frameQuat(arm,aim,shaft.cross(aim).normalize());arm.nativeStampRest??=arm.lastSolvedQ.clone();arm.orientationGoal=arm.nativeStampRest.clone().slerp(goal,arm.orientationWeight??arm.gripWeight??1);arm.orientationStrength=20*(arm.orientationWeight??arm.gripWeight??1);}
   else{arm.nativeStampRest=null;if(kind==='pen'){arm.orientationGoal=frameQuat(arm,forward,normal);arm.orientationStrength=2*(arm.gripWeight??1);}}
-  const solved=solveHumanoidArm(actor,arm,anchor,point,scale,{dt:actor.poseDt,collision});rotationWorld(arm.upper,solved.upper);rotationWorld(arm.lower,solved.lower);turnForearm(arm,solved.state.roll);rotationWorld(arm.wrist,solved.hand);arm.upperRoll=Math.abs(arm.lastNativeTwist||0);arm.forearmRoll=solved.state.roll;arm.wristBend=Math.hypot(solved.state.flex,solved.state.deviation);arm.clearance=collision?Math.min(limbClearance(shoulder,solved.elbow,.115),limbClearance(solved.elbow,solved.wrist,.115)):.02;arm.lastElbow=solved.elbow;arm.lastTarget=anchor.clone();arm.lastSolvedQ=solved.hand.clone();if(diagnostics){diagnostics.reachError=Math.max(diagnostics.reachError,solved.error);diagnostics.clearanceMin=Math.min(diagnostics.clearanceMin,arm.clearance);}return solved.error;
+  arm.toolFlexGoal=THREE.MathUtils.lerp(.18,kind==='pen'?Math.min(.60,arm.toolFlex??.18):kind==='stamp'?0:kind==='pinch'?.12:.18,arm.gripWeight??1);
+  const solved=solveHumanoidArm(actor,arm,anchor,point,scale,{dt:actor.poseDt,collision,pole});rotationWorld(arm.upper,solved.upper);rotationWorld(arm.lower,solved.lower);turnForearm(arm,solved.state.roll);rotationWorld(arm.wrist,solved.hand);arm.upperRoll=Math.abs(arm.lastNativeTwist||0);arm.forearmRoll=solved.state.roll;arm.wristBend=Math.hypot(solved.state.flex,solved.state.deviation);arm.clearance=collision?Math.min(limbClearance(shoulder,solved.elbow,.115),limbClearance(solved.elbow,solved.wrist,.115)):.02;arm.lastElbow=solved.elbow;arm.lastTarget=anchor.clone();arm.lastSolvedQ=solved.hand.clone();if(diagnostics){diagnostics.reachError=Math.max(diagnostics.reachError,solved.error);diagnostics.clearanceMin=Math.min(diagnostics.clearanceMin,arm.clearance);}return solved.error;
  }
 
  // Solve elbow -> grip as one rigid segment, then recover the wrist. This
@@ -114,7 +120,10 @@ function reach(actor,arm,anchor,forward,normal,pole,tip=false,kind=null,collisio
   if(Math.abs(bestTurn)>.000001)for(const step of [.098,.049,.0245,.01225,.006125,.0030625]){const center=bestTurn;for(const sign of [-1,1])evaluateFrame(center+sign*step);}
 
   handFrame=frame.clone().multiply(relative);q=handFrame.clone().multiply(arm.basis.clone().invert());
-  const clearance=collision?Math.min(limbClearance(shoulder,candidate.elbow,.15),limbClearance(candidate.elbow,wrist,.15)):.02;
+  // The imported sleeve has a wider envelope than the arm capsule. Keep a
+  // deliberate safety margin around the integrated instrument so the skinned
+  // shoulder/sleeve cannot graze its upper housing at the corner.
+  const clearance=collision?Math.min(limbClearance(shoulder,candidate.elbow,.24),limbClearance(candidate.elbow,wrist,.20)):.02;
   const continuity=coherent?candidate.elbow.distanceTo(arm.lastElbow):0,score=-(jointError>0?20+jointError*10:0)+Math.min(clearance,.012)-.0015*i-continuity*.15-(clearance<-.005?1:0)-(coherent&&continuity>.095?5:0);
   if(score>best){best=score;chosen={elbow:candidate.elbow,wrist,q,frame,handFrame,clearance,jointError};}if(i===0&&clearance>.01&&jointError===0)break;
  }
@@ -125,7 +134,7 @@ function reach(actor,arm,anchor,forward,normal,pole,tip=false,kind=null,collisio
  // Pronation is carried by the forearm; wrist flexion is authored at 10° for
  // writing and neutral carrying; the stamp uses an oriented grip with a
  // bounded wrist swing. Axial rotation is distributed through the forearm.
- const current=V(0,0,1).applyQuaternion(arm.basis).applyQuaternion(arm.wrist.getWorldQuaternion(Q())),wanted=V(0,0,1).applyQuaternion(frame),project=n=>n.clone().addScaledVector(lowerDir,-n.dot(lowerDir)).normalize(),n=project(current),m=project(wanted),roll=Math.atan2(lowerDir.dot(n.clone().cross(m)),n.dot(m));
+  const current=V(0,0,1).applyQuaternion(arm.basis).applyQuaternion(arm.wrist.getWorldQuaternion(Q())),wanted=V(0,0,1).applyQuaternion(frame),project=n=>n.clone().addScaledVector(lowerDir,-n.dot(lowerDir)).normalize(),n=project(current),m=project(wanted),roll=THREE.MathUtils.clamp(Math.atan2(lowerDir.dot(n.clone().cross(m)),n.dot(m)),-1.35,1.35);
  turnForearm(arm,roll);rotationWorld(arm.wrist,q);arm.forearmRoll=roll;arm.wristBend=flex;arm.clearance=clearance;
  const actual=arm.wrist.localToWorld(point.clone()),error=actual.distanceTo(anchor);
  if(diagnostics){diagnostics.reachError=Math.max(diagnostics.reachError,error);diagnostics.clearanceMin=Math.min(diagnostics.clearanceMin,clearance);}
@@ -138,6 +147,7 @@ export function poseDetective(actor,p,life,targets={},grips=null,context={}){
  actor.useHumanoidIK=!!context.humanoidMotion;actor.poseDt=Math.min(.07,Math.max(.001,life.time-(actor.lastPoseTime??life.time-.025)));actor.lastPoseTime=life.time;if(actor.resetPose){for(const arm of Object.values(actor.arms)){arm.nativeMotion=null;arm.nativeFrames=0;arm.lastElbow=null;arm.lastTarget=null;arm.stampRestQ=null;}actor.resetPose=false;}
  actor.motion.update(life.time,context);actor.root.updateMatrixWorld(true);
  const lean=context.taskLean??p.lean;addWorldRotation(actor.bones.spine,V(0,1,0),(context.torsoYaw||0)*.55);addWorldRotation(actor.bones.chest,V(0,1,0),(context.torsoYaw||0)*.45);
+ addWorldRotation(actor.bones.spine,V(0,0,1),-(context.sideLean||0)*.6);addWorldRotation(actor.bones.chest,V(0,0,1),-(context.sideLean||0)*.4);
  addWorldRotation(actor.bones.spine,V(1,0,0),lean*.45);addWorldRotation(actor.bones.chest,V(1,0,0),lean*.45);addWorldRotation(actor.head,V(0,1,0),p.headY);addWorldRotation(actor.head,V(1,0,0),p.headX-lean*.90);
 
  let miss=0;
@@ -146,6 +156,7 @@ export function poseDetective(actor,p,life,targets={},grips=null,context={}){
   if(!grips?.[side]&&!targets[side])position.y=Math.max(1.75,position.y);
   const forward=grips?.[side]?.forward||V(0,0,1),normal=grips?.[side]?.normal||V(0,1,0),pole=context.poles?.[side]||V(side==='l'?-.52:.52,1.75,-.65);
   const kind=grips?.[side]?.kind,weight=grips?.[side]?.weight??1;arm.toolFlex=grips?.[side]?.wristFlex??.18;arm.toolFlatness=grips?.[side]?.flatness??0;
+  arm.transitionBase={kind:side==='l'?'chin':'tap',weight:side==='l'?(context.chinBlend??0):(context.tipBlend??0)};
   const style=kind||(side==='l'&&context.chinBlend!==undefined?'chin':context.handModes?.[side]==='chin'?'chin':context.handModes?.[side]==='tap'?'tap':'relaxed');
   arm.restPoint=(arm.defaultAnchor||arm.palm).clone();if(side==='l')arm.restPoint.lerp(arm.palm,context.chinBlend??0);arm.orientationWeight=grips?.[side]?.orientationWeight;arm.anchorBlend=grips?.[side]?.anchorBlend;poseHand(arm,style,style==='chin'?(context.chinBlend??1):style==='tap'?(context.tipBlend??1):weight);
   actor.root.updateMatrixWorld(true);arm.gripWeight=weight;
@@ -158,13 +169,15 @@ export function poseDetective(actor,p,life,targets={},grips=null,context={}){
 }
 export function poseViewer(actor,targets,curls,point=false,tip=null,gripFrame=null,context={}){
  resetSkinContacts(actor);const diagnostics=freshDiagnostics();actor.lastDiagnostics=diagnostics;
+ if((context.clock||0)<(actor.lastPoseTime??0))for(const arm of Object.values(actor.arms)){arm.nativeMotion=null;arm.nativeFrames=0;}
+ actor.useHumanoidIK=true;actor.poseDt=Math.min(.07,Math.max(.001,(context.clock||0)-(actor.lastPoseTime??(context.clock||0)-.025)));actor.lastPoseTime=context.clock||0;
  actor.motion.update(context.clock||0,context);actor.root.updateMatrixWorld(true);const q=actor.root.getWorldQuaternion(Q()),up=V(0,1,0).applyQuaternion(q),forward=V(0,0,-1).applyQuaternion(q),right=V(1,0,0).applyQuaternion(q);let miss=0;
  for(const side of ['l','r']){
   const arm=actor.arms[side],shoulder=arm.upper.getWorldPosition(V());
   const localFrame=(side==='r'?context.rightFrame:context.leftFrame)||gripFrame;let fwd=localFrame?.forward||up,normal=localFrame?.normal||forward.clone().negate(),anchor=targets[side],isTip=side==='r'&&point;
   if(isTip){paperGrip(arm);arm.fingers[1].forEach((b,j)=>b.quaternion.copy(arm.rest[1][j]));actor.root.updateMatrixWorld(true);fwd=up.clone().multiplyScalar(.8).addScaledVector(forward,.6).normalize();normal=forward.clone().negate();anchor=tip;}
   const pole=shoulder.clone().addScaledVector(right,side==='l'?-.5:.5).addScaledVector(up,-.28).addScaledVector(forward,-.05);
-  const kind=side==='r'?context.kind:null;arm.gripWeight=side==='r'?(context.gripWeight??1):1;arm.toolFlex=localFrame?.wristFlex??.18;arm.toolFlatness=localFrame?.flatness??0;if(!point)poseHand(arm,kind||'relaxed',arm.gripWeight);actor.root.updateMatrixWorld(true);
+  const kind=side==='r'?context.kind:null;arm.gripWeight=side==='r'?(context.gripWeight??1):1;arm.toolFlex=localFrame?.wristFlex??.18;arm.toolFlatness=localFrame?.flatness??0;if(!isTip)poseHand(arm,kind||'relaxed',arm.gripWeight);actor.root.updateMatrixWorld(true);
   miss=Math.max(miss,reach(actor,arm,anchor,fwd,normal,pole,isTip,kind,context.collision,diagnostics));
  }
  applySkinContacts(actor);diagnostics.reachError=miss;return miss;
