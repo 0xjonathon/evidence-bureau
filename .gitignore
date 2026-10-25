@@ -1,0 +1,23 @@
+node_modules/
+.env
+.env.*
+!.env.example
+*.blend1
+.DS_Store
+coverage/
+
+.tools/
+
+public/vendor/
+
+# Local deployment state, assistant settings and generated bundles
+.edgeone/
+.claude/
+dist-eo/
+*.log
+*.zip
+
+# Large authoring files stay local; the current instrument source is small.
+*.blend
+!instrument-source-v9.blend
+docs/backup-*/

@@ -1,0 +1,69 @@
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+export async function createOffice(container,onReady,onObject){
+  let renderer;
+  try{renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});}catch{document.body.classList.add('no-webgl');onReady(false);return {setState(){},toggleLamp(){return false;},dispose(){}};}
+  renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.18;container.appendChild(renderer.domElement);
+  const scene=new THREE.Scene();scene.background=new THREE.Color('#172a23');scene.fog=new THREE.FogExp2('#172a23',.018);
+  const camera=new THREE.PerspectiveCamera(43,innerWidth/innerHeight,.1,80);
+  const target=new THREE.Vector3(0,2.20,-.50); // exported GLB converts Blender Z-up to glTF Y-up
+  const base=new THREE.Vector3(0,4.05,8.9);
+  const hemi=new THREE.HemisphereLight('#e7dfb6','#29392b',2.1);scene.add(hemi);
+  const key=new THREE.DirectionalLight('#ffdb9b',3.1);key.position.set(-3,7,5);key.castShadow=true;key.shadow.mapSize.set(2048,2048);key.shadow.camera.left=-7;key.shadow.camera.right=7;key.shadow.camera.top=7;key.shadow.camera.bottom=-5;key.shadow.normalBias=.03;scene.add(key);
+  const blue=new THREE.DirectionalLight('#87b5d7',1.25);blue.position.set(-4,4,-2);scene.add(blue);
+  const fill=new THREE.PointLight('#ffe4b1',12,12,2);fill.position.set(1,4,5);scene.add(fill);
+  const practical=new THREE.PointLight('#ffc56b',7,4,1.4);practical.position.set(-2.05,2.43,.45);scene.add(practical);
+  let office;let modelLoaded=false;
+  try{
+    const gltf=await new GLTFLoader().loadAsync('/assets/bureau.glb');office=gltf.scene;scene.add(office);modelLoaded=true;
+    office.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;if(o.material){o.material.envMapIntensity=.4;if(o.name==='MonitorScreen'){o.material.color.set('#142a1d');o.material.emissive.set('#31593d');o.material.emissiveIntensity=.6;}}}});
+  }catch(e){console.warn('Office asset unavailable',e);onReady(false);renderer.dispose();renderer.domElement.remove();document.body.classList.add('no-webgl');return {setState(){},toggleLamp(){return false;},dispose(){}};}
+  const head=office.getObjectByName('DetectiveHead');const detective=office.getObjectByName('Detective');const armL=office.getObjectByName('DetectiveArmL');const armR=office.getObjectByName('DetectiveArmR');const monitor=office.getObjectByName('Monitor');const receipt=office.getObjectByName('PrinterReceipt');
+  const shoulderL=new THREE.Group(),shoulderR=new THREE.Group();shoulderL.position.set(-.56,2.28,-1);shoulderR.position.set(.56,2.28,-1);(detective||scene).add(shoulderL,shoulderR);if(armL)shoulderL.attach(armL);if(armR)shoulderR.attach(armR);
+  const armLPosition=armL?.position.clone(),armRPosition=armR?.position.clone();const restHandDirection=new THREE.Vector3(-.01,-.60,1.22).normalize();const gripDirection=new THREE.Vector3();
+  const swivel=new THREE.Group();swivel.position.set(1.9,2.35,-.38);scene.add(swivel);if(monitor)swivel.attach(monitor);
+  const headRest=head?.rotation.clone();const armLRest=armL?.rotation.clone();const armRRest=armR?.rotation.clone();const receiptRest=receipt?.position.clone();
+  const noteCanvas=document.createElement('canvas');noteCanvas.width=512;noteCanvas.height=320;const noteContext=noteCanvas.getContext('2d');const noteTexture=new THREE.CanvasTexture(noteCanvas);noteTexture.colorSpace=THREE.SRGBColorSpace;const note=new THREE.Mesh(new THREE.PlaneGeometry(1.24,.78),new THREE.MeshStandardMaterial({map:noteTexture,roughness:.95}));note.rotation.x=-Math.PI/2;note.position.set(0,1.59,.3);note.visible=false;scene.add(note);
+  let noteVersion=0;
+  function writeNote(claim,imageUrl){const version=++noteVersion;noteContext.fillStyle='#eee3c5';noteContext.fillRect(0,0,512,320);noteContext.fillStyle='#42523a';noteContext.font='18px serif';noteContext.fillText('THE EVIDENCE BUREAU',35,45);noteContext.fillRect(35,60,440,2);noteContext.font='20px serif';for(let i=0;i<Math.min(claim.length,85);i+=19)noteContext.fillText(claim.slice(i,i+19),35,100+(i/19)*33);noteTexture.needsUpdate=true;if(imageUrl){const photo=new Image();photo.onload=()=>{if(version!==noteVersion)return;noteContext.fillStyle='#faf5e7';noteContext.fillRect(350,175,140,125);noteContext.drawImage(photo,358,183,124,100);noteTexture.needsUpdate=true;};photo.src=imageUrl;}}writeNote('INVESTIGATION REQUEST');
+  const receiptCanvas=document.createElement('canvas');receiptCanvas.width=512;receiptCanvas.height=384;const receiptContext=receiptCanvas.getContext('2d');const receiptTexture=new THREE.CanvasTexture(receiptCanvas);receiptTexture.colorSpace=THREE.SRGBColorSpace;
+  const printedSheet=new THREE.Mesh(new THREE.PlaneGeometry(1.05,.79),new THREE.MeshStandardMaterial({map:receiptTexture,roughness:.95,side:THREE.DoubleSide}));printedSheet.rotation.x=-Math.PI/2;printedSheet.visible=false;scene.add(printedSheet);
+  let reportData=null,marked=false,drawingStep=-1;
+  function drawReceipt(mark=false){if(!reportData)return;const c=receiptContext;c.fillStyle='#eee3c5';c.fillRect(0,0,512,384);c.fillStyle='#334b39';c.font='20px serif';c.fillText('EVIDENCE REPORT',30,40);c.font='12px monospace';c.fillText(reportData.id,30,63);c.fillRect(30,76,450,2);c.font='20px serif';for(let i=0;i<Math.min(reportData.claim.length,75);i+=20)c.fillText(reportData.claim.slice(i,i+20),30,112+(i/20)*28);c.font='14px serif';c.fillText('来源与完整证据见调查报告',30,330);if(mark){c.strokeStyle=reportData.verdict==='refuted'?'#a34330':'#3f6b45';c.fillStyle=c.strokeStyle;c.lineWidth=8;if(reportData.verdict==='refuted'){const amount=typeof mark==='number'?mark:1;const first=Math.min(amount*2,1),second=Math.max(0,(amount-.5)*2);c.beginPath();c.moveTo(330,210);c.lineTo(330+110*first,210+90*first);if(second>0){c.moveTo(440,210);c.lineTo(440-110*second,210+90*second);}c.stroke();}else{c.beginPath();c.arc(391,260,60,0,Math.PI*2);c.stroke();c.font='26px serif';c.fillText('有据',365,270);}}receiptTexture.needsUpdate=true;}
+  const drawingPen=new THREE.Mesh(new THREE.CylinderGeometry(.016,.011,.26,10),new THREE.MeshStandardMaterial({color:'#a94a32',roughness:.7}));drawingPen.visible=false;scene.add(drawingPen);
+  const stamp=new THREE.Group();stamp.position.set(.92,1.62,.77);scene.add(stamp);const stampRest=new THREE.Vector3(.8,1.62,.25);
+  for(const o of [...office.children])if(o.name.replace(/[^a-z]/gi,'').toLowerCase().startsWith('rubberstamp'))stamp.attach(o);
+  let state='idle',stateAt=performance.now(),lampOn=true,clock=0;let running=true;let raf;let last=0;let pointer={x:0,y:0};let targetPointer={x:0,y:0};
+  const scanner=new THREE.Mesh(new THREE.PlaneGeometry(1.8,.015),new THREE.MeshBasicMaterial({color:'#a6dfbc',transparent:true,opacity:.7,side:THREE.DoubleSide}));scanner.rotation.x=-Math.PI/2;scanner.position.set(0,1.59,.1);scanner.visible=false;scene.add(scanner);
+  const dustGeometry=new THREE.BufferGeometry();const positions=new Float32Array(110*3);for(let i=0;i<110;i++){positions[i*3]=(Math.random()-.5)*9;positions[i*3+1]=Math.random()*5;positions[i*3+2]=(Math.random()-.5)*6;}dustGeometry.setAttribute('position',new THREE.BufferAttribute(positions,3));const dust=new THREE.Points(dustGeometry,new THREE.PointsMaterial({color:'#d9d3ac',size:.012,transparent:true,opacity:.24}));scene.add(dust);
+  const raycaster=new THREE.Raycaster();const mouse=new THREE.Vector2();
+  function move(e){targetPointer={x:(e.clientX/innerWidth-.5)*2,y:(e.clientY/innerHeight-.5)*2};}
+  function click(e){if(e.target!==renderer.domElement)return;mouse.set(e.clientX/innerWidth*2-1,-e.clientY/innerHeight*2+1);raycaster.setFromCamera(mouse,camera);const hit=raycaster.intersectObject(office,true)[0];if(!hit)return;let n=hit.object;const names=[];while(n){names.push(n.name);n=n.parent;}if(names.some(n=>/Lamp/.test(n)))onObject('lamp');else if(names.some(n=>/Monitor|CRT/.test(n)))onObject('monitor');else if(names.some(n=>/Detective|Head|Fedora/.test(n)))onObject('detective');}
+  window.addEventListener('pointermove',move,{passive:true});container.addEventListener('click',click);
+  function resize(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.fov=w<800?49:43;camera.updateProjectionMatrix();base.set(0,w<800?3.25:4.05,w<800?9.6:8.9);target.y=w<800?1.55:2.20;}
+  resize();window.addEventListener('resize',resize);
+  function render(now){if(!running)return;raf=requestAnimationFrame(render);if(now-last<1000/(reduced?20:40))return;const dt=Math.min((now-last)/1000,.1);last=now;clock+=dt;pointer.x+=(targetPointer.x-pointer.x)*.04;pointer.y+=(targetPointer.y-pointer.y)*.04;
+    const t=(now-stateAt)/1000;let focus=state==='search'?Math.min(t/1.4,1):0;
+    camera.position.copy(base);if(!reduced){camera.position.x+=pointer.x*.09;camera.position.y-=pointer.y*.04;}camera.position.z-=focus*.38;camera.lookAt(target.x+focus*.25,target.y,target.z);
+    if(head&&headRest){head.rotation.copy(headRest);if(!reduced){head.rotation.y=Math.sin(clock*.65)*.025;head.rotation.x=Math.sin(clock*.8)*.008;if(state==='search')head.rotation.y=.12+Math.sin(clock*.5)*.025;if(state==='receive')head.rotation.x=.04*Math.sin(Math.min(t,1)*Math.PI);if(state==='unknown')head.rotation.z=Math.sin(t*2)*.055;if(state==='supported')head.rotation.x=Math.sin(Math.min(t,2.5)*4)*.025;if(state==='refuted')head.rotation.y=Math.sin(Math.min(t,2.5)*4)*.06;}}
+    if(detective&&!reduced)detective.position.y=Math.sin(clock*1.35)*.006;
+    shoulderL.quaternion.identity();shoulderR.quaternion.identity();
+    if(armL&&armR){armL.position.copy(armLPosition);armR.position.copy(armRPosition);armL.rotation.copy(armLRest);armR.rotation.copy(armRRest);if(!reduced){if(state==='receive'){const reach=Math.sin(Math.min(t/1.3,1)*Math.PI)*.12;shoulderL.rotation.x=reach;shoulderR.rotation.x=reach;}if(state==='unknown'){shoulderL.rotation.z=-.18;shoulderR.rotation.z=.18;shoulderL.rotation.x=.12;shoulderR.rotation.x=.12;}}}
+    const returning=state==='mixed'||state==='unknown';
+    note.visible=state==='receive'||state==='search'||returning;note.position.y=state==='receive'&&!reduced?1.59+Math.max(0,.35-t*.3):1.59;note.position.z=returning?Math.min(t*.4,1):.3;
+    swivel.rotation.y+=( (state==='search'?.32:0)-swivel.rotation.y)*.045;scanner.visible=state==='search'&&!reduced;if(scanner.visible)scanner.position.z=.3+Math.sin(clock*2)*.45;
+    printedSheet.visible=state==='print'&&!!reportData;
+    if(printedSheet.visible){const p=reduced?1:Math.min(t/.8,1);printedSheet.position.set(-1.52+1.82*p,1.89-.27*p+Math.sin(p*Math.PI)*.1,.1+p*.2);if(reportData.verdict==='refuted'){const amount=Math.max(0,Math.min((t-.55)/.8,1));const step=Math.floor(amount*20);if(step!==drawingStep){drawingStep=step;drawReceipt(amount);}if(amount===1&&!marked){marked=true;container.setAttribute('aria-label','侦探已在报告上画叉');}}else if(t>1&&!marked){marked=true;drawReceipt(true);container.setAttribute('aria-label','侦探已在报告上盖章');}}
+    drawingPen.visible=false;
+    if(state==='print'&&reportData?.verdict==='refuted'&&!reduced&&t>.55&&t<1.65){const amount=Math.max(0,Math.min((t-.55)/.8,1));const first=amount<.5;const segment=first?amount*2:(amount-.5)*2;const px=first?330+110*segment:440-110*segment;const py=210+90*segment;drawingPen.visible=true;drawingPen.position.set(printedSheet.position.x+(px/512-.5)*1.05,printedSheet.position.y+.14,printedSheet.position.z+(py/384-.5)*.79);gripDirection.set(drawingPen.position.x-.56,drawingPen.position.y+.08-2.28,drawingPen.position.z+1).normalize();shoulderR.quaternion.setFromUnitVectors(restHandDirection,gripDirection);}
+    stamp.position.copy(stampRest);
+    if(state==='print'&&reportData?.verdict==='supported'&&!reduced){const reach=Math.min(t/.5,1);const lift=t<.5?Math.sin(t/.5*Math.PI/2)*.38:t<1?.38*(1-(t-.5)/.5):Math.min((t-1)/.4,1)*.3;stamp.position.set(stampRest.x-.5*reach,stampRest.y+lift,stampRest.z+.05*reach);gripDirection.set(stamp.position.x-.56,stamp.position.y+.17-2.28,stamp.position.z+1).normalize();shoulderR.quaternion.setFromUnitVectors(restHandDirection,gripDirection);}
+    if(receipt&&receiptRest){receipt.position.copy(receiptRest);if(state==='print'||state==='supported'||state==='refuted'||state==='mixed'||state==='unknown')receipt.position.z+=Math.min(t*.1,.28);}
+    if(!reduced)dust.rotation.y=clock*.006;
+    renderer.render(scene,camera);
+  }
+  function visible(){if(document.hidden){running=false;cancelAnimationFrame(raf);}else if(!running){running=true;last=performance.now();raf=requestAnimationFrame(render);}}
+  document.addEventListener('visibilitychange',visible);raf=requestAnimationFrame(render);onReady(modelLoaded);
+  return {setClaim:writeNote,setReport(report){reportData=report;marked=false;drawingStep=-1;drawReceipt(false);},setState(next){state=next;stateAt=performance.now();container.setAttribute('aria-label',next==='print'?'侦探正在打印调查报告':next==='unknown'?'侦探退回委托，表示暂时不知道':next==='mixed'?'侦探退回需要说明条件的委托':'卡通侦探事务所三维场景');},toggleLamp(){lampOn=!lampOn;practical.visible=lampOn;const bulb=office.getObjectByName('Lamp_bulb')||office.getObjectByName('Lampbulb');if(bulb?.material)bulb.material.emissiveIntensity=lampOn?3:0;return lampOn;},dispose(){running=false;cancelAnimationFrame(raf);window.removeEventListener('pointermove',move);window.removeEventListener('resize',resize);document.removeEventListener('visibilitychange',visible);container.removeEventListener('click',click);scene.traverse(o=>{o.geometry?.dispose();if(o.material)(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>m.dispose());});noteTexture.dispose();receiptTexture.dispose();renderer.dispose();}};
+}

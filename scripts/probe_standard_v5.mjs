@@ -1,0 +1,13 @@
+import {readFile} from 'node:fs/promises';import * as THREE from 'three';import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';import {installCharacterAssets,buildDetective,buildViewer,poseDetective,poseViewer} from '../public/standard-actor.js';import {pose,life} from '../public/clips.js';
+globalThis.self=globalThis;
+const loader=new GLTFLoader();loader.register(parser=>{parser.textureLoader={load(url,done){const t=new THREE.Texture();done(t);return t;}};return {name:'NODE_BONE_PROBE'};});
+const models={},meta={};for(const role of ['detective','visitor']){const b=await readFile('public/assets/'+role+'-standard-v5.glb');models[role]=await loader.parseAsync(b.buffer.slice(b.byteOffset,b.byteOffset+b.length),'');meta[role]=JSON.parse(await readFile('public/assets/'+role+'-standard-v5.json'));}
+installCharacterAssets(models,meta);const det=buildDetective(),visitor=buildViewer();det.root.position.set(0,1.56,-.75);det.root.scale.setScalar(.8);det.root.updateMatrixWorld(true);
+const v=(x=0,y=0,z=0)=>new THREE.Vector3(x,y,z);
+function info(a){a.root.updateMatrixWorld(true);return Object.fromEntries(['l','r'].map(s=>{let arm=a.arms[s];return [s,{shoulder:arm.upper.getWorldPosition(v()).toArray(),elbow:arm.lower.getWorldPosition(v()).toArray(),wrist:arm.wrist.getWorldPosition(v()).toArray(),palm:arm.wrist.localToWorld(arm.palm.clone()).toArray(),boneScale:arm.wrist.getWorldScale(v()).toArray(),offset:arm.palm.toArray()}]}));}
+console.log('detective initial',JSON.stringify(info(det)));console.log('visitor initial',JSON.stringify(info(visitor)));
+const cam=new THREE.PerspectiveCamera();cam.position.set(0,2.9,2.9);cam.lookAt(0,2.2,.45);cam.updateMatrixWorld(true);const fwd=v(0,0,-1).applyQuaternion(cam.quaternion),up=v(0,1,0).applyQuaternion(cam.quaternion);
+const drop=.55-2.1*Math.tan(49*Math.PI/360)-.20;visitor.root.position.copy(cam.position).addScaledVector(up,-.02+drop).addScaledVector(fwd,2.1);visitor.root.quaternion.copy(cam.quaternion);visitor.root.updateMatrixWorld(true);
+const targets={l:v(-.424,2.002,.365),r:v(.424,2.002,.365)},rotation=new THREE.Quaternion().setFromEuler(new THREE.Euler(-.6,0,0)),frame={forward:v(0,1,0).applyQuaternion(rotation),normal:v(0,0,1).applyQuaternion(rotation)};
+for(let i=0;i<50;i++){const t=i*.04;const d=poseDetective(det,pose('offer',2.3),life(t),{},null,{state:'sequence',sequence:'onboard',time:3.15});const m=poseViewer(visitor,targets,{l:.5,r:.5},false,null,frame,{clock:t,state:'sequence',sequence:'onboard',time:3.15});if(i===49)console.log('miss',d,m);}
+console.log('detective posed',JSON.stringify(info(det)));console.log('visitor posed',JSON.stringify(info(visitor)));

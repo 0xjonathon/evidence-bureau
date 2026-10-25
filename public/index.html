@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#172b25"><meta name="description" content="有据事务所。一间只凭证据说话的侦探事务所。递交说法或截图，让元宝搜索带着证据回来。">
+  <title>有据事务所 · THE EVIDENCE BUREAU</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css?v=8">
+  <script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/":"/vendor/addons/"}}</script>
+  <script type="module" src="/app.js?v=8"></script>
+</head>
+<body data-phase="welcome">
+  <div id="scene" aria-label="有据侦探事务所三维场景"></div>
+  <div class="scene-grain" aria-hidden="true"></div><div class="vignette" aria-hidden="true"></div>
+  <div id="loading"><span class="loading-lens">◎</span><p>事务所开灯中<span>...</span></p></div>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+  <header class="topbar">
+    <a href="/" class="wordmark" aria-label="有据事务所首页"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="17" cy="17" r="11"/><path d="m25 25 10 10M12 17h10m-5-5v10"/></svg><span>THE EVIDENCE<br><b>BUREAU</b></span></a>
+    <span class="header-rule"></span>
+    <nav><div id="agentBadge" class="agent-badge" hidden><span id="badgeNo"></span><b id="badgeName"></b><small id="badgeRank"></small></div><button id="archiveBtn" class="nav-btn"><span>▤</span> 案件档案 <small id="archiveCount">00</small></button><button id="soundBtn" class="icon-btn" aria-label="开启环境音" aria-pressed="false">♪<span class="muted-line"></span></button></nav>
+  </header>
+  <main>
+
+    <aside class="office-status"><span class="status-time" id="clock"></span></aside>
+    <div class="speech" id="speech" aria-live="polite"><span class="speech-label">有据侦探</span><p id="speechText">“需要调查真相吗？”</p></div>
+    <aside class="desk-hint"><button id="statusBtn"><span id="connectionDot"></span><span id="connectionLabel">检查接入状态</span> ↗</button></aside>
+    <section id="welcome" class="welcome"><button id="startCaseBtn"><span class="welcome-reticle" aria-hidden="true">＋</span><span>递交委托</span><b aria-hidden="true">↗</b></button></section><button id="skipSequenceBtn" class="skip-sequence" hidden>跳过动作 ↗</button><div id="paperStage" class="paper-stage" hidden>
+
+      <form id="caseForm" class="case-paper">
+        <div class="paper-perforation" aria-hidden="true"></div>
+        <div class="paper-head"><span class="file-label">INVESTIGATION REQUEST</span><span class="paper-number">№ <span id="caseNumber">001</span></span></div>
+        <div class="paper-title-row"><h2>调查委托单</h2></div>
+        <div class="paper-divider"></div>
+        <label for="claim">待查证的说法</label>
+        <textarea id="claim" name="claim" minlength="4" maxlength="800" required></textarea>
+        <div id="attachment" class="attachments-tray" hidden><div class="attachment-heading"><span>附录 / <span id="attachmentCount">0</span> 张截图</span><button type="button" id="removeAttachment">移除全部</button></div><div id="attachmentList" class="attachment-list"></div></div>
+        <div class="paper-tools"><label class="upload-label" for="imageInput" role="button" tabindex="0"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 10 5-5a3 3 0 0 1 4 4l-7 7a4 4 0 0 1-6-6l7-7m-3 8 6-6"/></svg>夹入截图 </label><input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp" multiple hidden><button type="button" id="extractBtn" class="text-btn" hidden>识别全部截图</button><span id="charCount">0 / 800</span></div>
+        <div class="paper-bottom"><label class="deep-option"><input type="checkbox" id="deep"><span class="check-box"></span><span>深度调查</span></label><button type="submit" class="submit-btn" id="submitBtn">递交委托 <span>↗</span></button></div>
+        
+      </form>
+    </div>
+    <svg id="projectionLink" aria-hidden="true"><defs><linearGradient id="beamColor" x1="0" y1="1" x2="0" y2="0"><stop stop-color="#91f9d2" stop-opacity=".48"/><stop offset="1" stop-color="#91f9d2" stop-opacity=".02"/></linearGradient></defs><path class="projection-beam"/><path class="projection-wire"/><circle r="5" class="projection-source"/></svg><section class="investigation-panel" id="investigationPanel" hidden aria-live="polite"><div class="terminal-top"><span class="terminal-dot"></span><span>THE EVIDENCE TERMINAL</span><span id="terminalMode">LIVE</span></div><div class="agent-heading"><span class="agent-spinner" aria-label="调查链运行中"></span><div><p class="agent-kicker">AUTONOMOUS INVESTIGATION</p><h2 id="investigationHeading">线索已收到。开始查证。</h2></div><span class="agent-orbit" aria-hidden="true">◎</span></div><ol class="agent-steps" aria-label="调查阶段"><li data-stage="plan"><i>01</i><span>拆解</span></li><li data-stage="search"><i>02</i><span>检索</span></li><li data-stage="compare"><i>03</i><span>比对</span></li><li data-stage="review"><i>04</i><span>复核</span></li><li data-stage="complete"><i>05</i><span>报告</span></li></ol><div class="progress-track"><span id="progressBar"></span></div><div id="investigationLog" class="investigation-log"></div><div class="terminal-footer"><span><b class="live-pulse"></b> <span id="elapsed">00:00</span> <small>阶段进度</small></span><button id="cancelBtn">撤回委托 ×</button></div></section>
+    <div class="sample-cases" id="sampleCases" hidden><button type="button" data-demo="hero" class="hero-case">▶ 证据剧场：金星的一天 <b>开始演示</b></button><button type="button" data-demo="venus">金星的一天，比一年长？ <b>↗</b></button><button type="button" data-demo="moon">月球背面永远是黑夜？ <b>↗</b></button><button type="button" data-demo="sound">太空中能听见爆炸声？ <b>↗</b></button><small>离线示例 · 英雄案件可重复播放</small></div>
+  </main>
+  <footer class="bottom-bar"><span>少一点幻觉，多一点搜索。</span><button id="lampBtn" title="切换台灯" aria-pressed="true">◉ 桌灯已开</button><span class="powered">SEARCH WITH <b>元宝</b><span class="footer-slash">/</span> MADE OF EVIDENCE</span></footer>
+  
+  <dialog id="reportDialog" class="report-dialog"><button class="dialog-close" data-close aria-label="关闭报告">×</button><article id="reportContent"></article><div class="report-actions"><button id="wechatShareBtn" class="secondary-btn">微信好友 ↗</button><button id="momentsShareBtn" class="secondary-btn">朋友圈 ↗</button><button id="exportBtn" class="secondary-btn">↓ 保存证据报告</button><button id="printBtn" class="secondary-btn">打印报告</button><button id="replayBtn" class="secondary-btn">回放结案动作</button><button id="watchBtn" class="secondary-btn">帮我盯着</button><button id="newCaseBtn" class="submit-btn">再查一件 ↗</button></div></dialog>
+  <dialog id="shareDialog" class="share-dialog"><button class="dialog-close" data-close aria-label="关闭分享">×</button><p class="eyebrow">SHARE THE EVIDENCE</p><h2 id="shareTitle">分享调查报告</h2><img id="sharePoster" alt="调查报告分享海报" hidden><div class="share-actions"><a id="savePosterBtn" class="submit-btn" hidden>↓ 保存海报</a><button id="nativeShareBtn" class="secondary-btn" hidden>打开系统分享</button><button id="copyShareBtn" class="secondary-btn">复制证据文案</button><button id="shareBackBtn" class="secondary-btn">返回完整报告</button></div><details><summary>查看证据文案</summary><textarea id="shareText" readonly aria-label="分享证据文案"></textarea></details></dialog>
+  <dialog id="watchDialog" class="info-dialog"><button class="dialog-close" data-close aria-label="关闭">×</button><p class="eyebrow">KEEP WATCHING</p><h2>让事务所帮你盯着。</h2><form id="watchForm"><label for="watchEmail" class="dialog-desc">接收提醒的邮箱</label><input id="watchEmail" type="email" required maxlength="120" autocomplete="email" placeholder="you@example.com" class="watch-input"><button type="submit" class="submit-btn" id="watchSubmit">发送确认邮件 ↗</button></form><div id="watchList"></div></dialog>
+  <dialog id="archiveDialog" class="side-dialog"><button class="dialog-close" data-close aria-label="关闭档案">×</button><p class="eyebrow">THE CASE ARCHIVE</p><h2>每一份真相，都有档可查。</h2><div id="archiveList"></div><button id="clearArchiveBtn" class="text-btn danger">清空本机档案</button></dialog>
+  <dialog id="statusDialog" class="info-dialog"><button class="dialog-close" data-close aria-label="关闭状态">×</button><p class="eyebrow">BEHIND THE DESK</p><h2>事务所接入状态</h2><div id="providerStatus"></div></dialog>
+</body>
+</html>

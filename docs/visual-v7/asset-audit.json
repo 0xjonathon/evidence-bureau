@@ -1,0 +1,92 @@
+{
+  "version": "7.0.0",
+  "assets": [
+    {
+      "name": "bureau-room-v3",
+      "file": "public/assets/bureau-room-v3.glb",
+      "bytes": 2942880,
+      "sha256": "f7b6eb553efa87725ffff8720d0ff2e9f876be84f6958aee3b48c103963e2123",
+      "meshes": 224,
+      "nodes": 225,
+      "triangles": 67640,
+      "materials": 17,
+      "textures": 0,
+      "skinJoints": [],
+      "externalResources": 0,
+      "runtime": true
+    },
+    {
+      "name": "detective-standard-v5",
+      "file": "public/assets/detective-standard-v5.glb",
+      "bytes": 5657256,
+      "sha256": "3f2b7e653f31a8a4697dc38c4fcd9a388f9f850c25f313b6e6677a84e8387e17",
+      "meshes": 12,
+      "nodes": 122,
+      "triangles": 43884,
+      "materials": 19,
+      "textures": 15,
+      "skinJoints": [
+        107
+      ],
+      "externalResources": 0,
+      "runtime": true,
+      "sourceModel": "Sakurada_Fumiriya",
+      "license": "CC0-1.0",
+      "humanoidJoints": 54,
+      "clips": [
+        "Sitting_Idle_Loop",
+        "Sitting_Talking_Loop",
+        "Driving_Loop",
+        "PickUp_Table",
+        "Interact",
+        "Idle_Loop"
+      ]
+    },
+    {
+      "name": "visitor-standard-v5",
+      "file": "public/assets/visitor-standard-v5.glb",
+      "bytes": 6214224,
+      "sha256": "25fe8859a85f03889a74f29e8c6496dd730d8dfbee79efa34650637d16cb1072",
+      "meshes": 3,
+      "nodes": 135,
+      "triangles": 34395,
+      "materials": 17,
+      "textures": 17,
+      "skinJoints": [
+        129
+      ],
+      "externalResources": 0,
+      "runtime": true,
+      "sourceModel": "Sendagaya_Shibu",
+      "license": "CC0-1.0",
+      "humanoidJoints": 54,
+      "clips": [
+        "Sitting_Idle_Loop",
+        "Sitting_Talking_Loop",
+        "Driving_Loop",
+        "PickUp_Table",
+        "Interact",
+        "Idle_Loop"
+      ]
+    },
+    {
+      "name": "instrument-v7",
+      "file": "public/assets/instrument-v7.glb",
+      "bytes": 258872,
+      "sha256": "fd2f2e6d0d0535e6d0d56b19aa451c83d8c259e7f92f3abcb2423433ac6429bf",
+      "meshes": 30,
+      "nodes": 30,
+      "triangles": 4942,
+      "materials": 5,
+      "textures": 0,
+      "skinJoints": [],
+      "externalResources": 0,
+      "runtime": true
+    }
+  ],
+  "sourceScene": "assets-source-v5.blend",
+  "instrumentSource": "instrument-source-v7.blend",
+  "provenance": "Original room and integrated instrument. Two VRoid beta CC0 sample humanoids and Quaternius CC0 motion layers; see docs/ASSET-CREDITS.md.",
+  "animation": "World-seated visitor, native arm IK and articulated finger contacts, Rapier swept paper volume, integrated scanner/display/output, verdict-specific tools, report returned to the desk before opening.",
+  "validation": "128 tests pass, including actual skinned arm/hand surface samples, paper paths and fast playback, exported chassis bounds and tool reach. See tests/desk-interaction.test.mjs and docs/visual-v7/REVIEW.md."
+}

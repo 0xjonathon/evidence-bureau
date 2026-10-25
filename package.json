@@ -1,0 +1,22 @@
+{
+  "name": "the-evidence-bureau",
+  "version": "6.0.0-dev",
+  "private": true,
+  "type": "module",
+  "description": "有据事务所：以元宝搜索为核心的沉浸式侦探查证网页",
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env server/index.mjs",
+    "start": "node --env-file-if-exists=.env server/index.mjs",
+    "build": "node scripts/copy-vendor.mjs",
+    "build:edgeone": "node scripts/build-edgeone.mjs",
+    "deploy:edgeone": "node scripts/deploy-edgeone.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "for f in public/*.js server/*.mjs lib/*.mjs scripts/copy-vendor.mjs scripts/build-edgeone.mjs scripts/deploy-edgeone.mjs cloud-functions/api/*.js; do node --check \"$f\" || exit 1; done"
+  },
+  "dependencies": {
+    "@dimforge/rapier3d-compat": "0.21.0",
+    "@edgeone/pages-blob": "0.0.18",
+    "hanzi-writer-data": "2.0.1",
+    "three": "0.180.0"
+  }
+}

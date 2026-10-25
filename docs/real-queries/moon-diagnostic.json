@@ -1,0 +1,380 @@
+{
+  "id": "EB-20261024-CA3D14",
+  "claim": "月球背面永远没有阳光、一直是黑夜，这个说法是真的吗？",
+  "depth": "standard",
+  "startedAt": "2026-10-24T01:21:12.857Z",
+  "completedAt": "2026-10-24T01:22:05.223Z",
+  "mode": "live",
+  "provider": "腾讯元宝搜索 / SearchPro",
+  "reviewStatus": "same-model-second-pass",
+  "queries": [
+    "月球背面永远没有阳光、一直是黑夜，这个说法是真的吗？",
+    "月球背面 是否永远没有阳光 黑夜 科学解释",
+    "NASA 月球背面 光照情况 官方原始资料"
+  ],
+  "sources": [
+    {
+      "url": "http://www.igeo.cgs.gov.cn/kpyd/KPCG/202609/t20260929_869902.html",
+      "title": "2026年科普大赛三等奖为什么我们总是看到月球同一面?",
+      "excerpt": "晚上抬头看月亮,我们会发现一件很有意思的事:无论是弯弯的月牙,还是明亮的满月,月面上那些深浅不一的斑纹总是很熟悉。古人看到的是这张“脸”,今天的我们看到的也还是这张“脸”。月亮每天都在天空中移动,月相也不断变化,可它为什么像是认准了地球一样,总把同一面朝向我们? 很多人最先想到的答案是:因为月球不会自转。其实恰恰相反,月球一直都在自转。它不仅绕着地球运行,自己也在不停地转动。只是这两种运动配合得非常巧:以遥远恒星为参照,月球绕地球一周大约需要27.3天,自转一周也大约需要27.3天。当月球绕地球走完一圈时,它自己刚好也转了一圈。 这里的27.3天,和我们常听到的“一个月约29.5天”并不矛盾。27.3天是月球相对于遥远恒星绕地球一周的时间;约29.5天则是从一次新月到下一次新月的月相周期。后者更长,是因为月球绕地球运行的同时,地球也带着月球一起绕太阳前进。月球还要再走一小段,才能回到相同的日、地、月相对位置。 为了看清“公转一圈、自转一圈”意味着什么,可以在月球表面想象一个固定标记。如果月球只公转、完全不自转,这个标记会逐渐偏向一旁;当月球运行到地球另一侧时,我们将看到月球原来的背面。这样一来,一圈之内我们本该依次看到它的各个侧面。 真实情况却不是这样。月球公转四分之一圈时,也自转约四分之一圈;公转半圈时,也自转约半圈;公转一整圈时,正好完成一次自转。因此,无论它位于轨道上的什么位置,那个固定标记都大致朝向地球。 图2 月球不自转与同步自转在四个轨道位置上的对比 作者根据同步自转原理使用Ai绘制;天体大小和地月距离均未按真实比例表示。 还可以做一个很简单的绕桌实验。第一步,面对桌子中心站好,把桌子当作地球,把自己当作月球;第二步,始终让脸朝向桌子中心,沿桌边慢慢走一圈;第三步,回到起点后回想自己的朝向变化。你会发现,虽然你一直面对桌子,但身体实际上已经转过一整圈。月球也是类似的道理。 所以,月球总让我们看到同一面,并不是因为它不转,反而正是因为它在转,而且自转和公转保持着近乎相同的节奏。如果月球真的一点也不自转,我们反而会在它绕地球运行的过程中看到不同侧面。 扫码观看:月球同步自转动画 那么,这种恰到好处的节奏只是巧合吗?并不是。在月球形成后的早期阶段,它的自转速度并不像今天这样。地球的引力持续作用于月球,而月球靠近地球的一侧和远离地球的一侧受到的引力并不完全相同。长期下来,这种差异会使月球产生轻微形变,并在内部造成能量耗散,使自转逐渐减慢和调整。经过极其漫长的时间,月球最终进入今天这种相对稳定的状态:自转一周与绕地球公转一周的时间基本相同。 这种现象叫作“潮汐锁定”,月球目前的运动状态也常被称为“同步自转”。它并不是被固定住了,而是在不断运动中保持着稳定朝向。月球是我们最熟悉的例子,但潮汐锁定在太阳系的卫星中并不少见。 月球今天的同步自转还保留着地月系统长期演化的线索。研究月球的轨道、自转和潮汐作用,可以帮助科学家了解地球与月球在数十亿年里如何彼此影响,也能进一步认识月球内部结构。一个看似简单的“总看到同一面”,背后连接着行星动力学与月球内部研究。 说到这里,还有一个常见误解:既然我们总看到月球正面,那月球背面是不是永远没有阳光?当然不是。“月球背面”只是指背向地球、平时无法从地面直接看到的那一面,并不是“永远黑暗的一面”。 月球在绕地球运行时不断接受太阳照射。正面会经历白天和黑夜,背面同样如此。当太阳照亮月球背面时,那里也是一片白昼,只不过那一面恰好背对着我们。因此,把“月球背面”理解成“月球的黑暗面”并不准确。 图1 月球正面与背面对比 月面影像底图:NASA/GSFC/Arizona State University,Lunar Reconnaissance Orbiter Camera;文字与版式为作者整理。 也正因为我们站在地球上无法直接看见完整的背面,人类过去对那里一直十分陌生。如今,人类对月球背面的探索已从“绕过去看见它”发展到“把样品带回来研究它”。2024年,嫦娥六号首次从月球背面采集并返回样品,为研究月球正面与背面为何差异明显,以及月球早期如何形成和演化,提供了全新的实物证据。 月球的岩石和土壤记录着数十亿年的地质历史,极区还可能保存水冰等自然物质。它们在人的时间尺度上几乎无法重新形成。认识月球,不只是为了知道“那里有什么”,也提醒我们:未来探测和利用时,应当珍惜这些自然资源与地质遗产,尽量减少不必要的破坏。 扫码观看:月球背面日照动画 另一个容易产生的误会,是认为人类从地球上永远只能看到月球表面严格的一半,也就是50%。实际上,月球的运动没有理想模型里那么整齐:它的轨道不是完美的圆,运行速度会有变化,自转轴也存在一定倾斜。因此,从地球上看,月球会出现轻微的“摇摆”,这种现象叫作“天平动”。 借助天平动,我们有时能多看到月球东边一点,有时能多看到西边一点,也能看到靠近南北两极的一些区域。长期累计起来,从地球上实际能够看到的月面约占整个月球表面的59%,比一半稍多一些。 扫码观看:月球天平动动画 所以,当我们下一次再抬头看月亮时,可以记住:眼前这张几乎从不更换的“脸”,并不是因为月球静静地悬在那里不动。相反,它一直在自转,也一直在绕地球运行。正是这两种运动保持着近乎相同的节奏,才让月球在漫长岁月里,始终以熟悉的一面陪伴着地球。 参考资料  Ćuk, M., Hamilton, D. P., Lock, S. J., & Stewart, S. T. (2016). Tidal evolution of the Moon from a high-obl...",
+      "publishedAt": "2026/09/29 00:00:00",
+      "site": "中国地质调查局官网",
+      "host": "igeo.cgs.gov.cn",
+      "kind": "搜索摘要",
+      "id": "S1",
+      "query": "月球背面永远没有阳光、一直是黑夜，这个说法是真的吗？",
+      "retrievedAt": "2026-10-24T01:21:16.850Z"
+    },
+    {
+      "url": "https://www.kepuchina.cn/wiki/yzts/02/201907/t20190704_1077813.shtml",
+      "title": "如果你生活在月球上,你会看到什么?",
+      "excerpt": "如果你生活在月球上,你会看到什么? 如果你生活在月球上,那么你将要不得不放弃很多原先在地球上生活时你觉得习以为常的东西:比如你脚踏实地的走路,或者不用佩戴氧气面具就可以自在的呼吸——但还有一点很多人会忘记:你看到的夜景将会很不一样。 地球上的人们千百万年来一直在抬头仰望夜空中的那一轮皎洁的明月,也诞生了多少关于月亮的作品和诗篇。月亮的阴晴圆缺,明暗变化,东升西落,早已融入我们生活和常识的一部分。但是你有没有想过,如果你站在月球上看,地球将会是什么样的? 好,要想回答这个问题,首先取决于你在月球表面的什么地方。 月球处于与地球的潮汐锁定状态之下,这就意味着其公转周期与自转周期方向相同且周期一致,月球围绕自己的自转轴自转一圈,和月球围绕地球公转一圈的时间,大致都是一个月左右。很容易想象,这样一来,月球将永远以相同的一面面朝地球。这也是为什么,自古以来,地球上的人们每天晚上都只能看到相同的一面月球,而永远无法看到月球背面的原因。 最早亲眼目睹月球背面的人类,是“阿波罗”8号上的三位宇航员,他们在1968年搭乘飞船围绕月球飞行,亲眼看到了舷窗之外的月球背面景象。 到这里,你应该已经可以理解,如果你站在月球的背面(就像此时此刻中国的“嫦娥4号”探测器和“玉兔2号”月球车那样),那么你在天上是看不到地球的。而如果你站在月球的正面(就像2013年中国嫦娥3号探测器和“玉兔号”月球车那样),那么你抬头就能看到天空中悬浮着的地球。并且更妙的是,在大约一个月的时间里,你将可以看到地球经历完整的“地相”(而不是“月相”)变化周期,其变化顺序完全和月相相反——你新月,我“满地”,你上弦月,我“下弦地”。 月相之所以会产生,是由于日地月三者之间的位置关系发生变化,由于月球本身不透明,其一半的面积总会处于被太阳照亮的状态。随着日地月三者位置关系的变化,我们从地球上会看到月球明亮的区域大小发生改变。但实际上我们目睹的就是一个月时间里,月球不同地区经历白天和黑夜的变化过程。 当地球上的人们看到的是“新月”时,我们看到的是整个黑暗的半个月球,那里正经历黑夜,没有被太阳照射到,但与此同时,从月球上观察,此时的地球却正处于“满地”——半个地球被太阳完整地照亮。而在接下来的两个星期里,月球上的观察者将看到地球明亮的区域逐渐缩小,直到陷入完全黑暗,也就是“新地”——而此刻在地球上,人们正抬头欣赏着一轮完整明亮的满月。此时,对于站在月球上的观察者来说,由于满月的光反射到地球上,因此他们有可能可以在天空中隐约看到地球的轮廓。 NASA月球与行星研究所教育与公众活动主管克里斯蒂娜·舒普拉(Christine Shupla)表示:“地球一定看上去非常黑,但是或许你能看到某些城市地区的灯光。” 不过,你看到的地球景象可能不会那么的通透。如果你所在地区正在经历白天,那么尽管由于月球没有大气层,你仍然可以看到天空中的星星和地球,但是由于强烈的阳光和强烈反光的月面岩石非常刺眼,可能干扰到的你的观察。另外一点非常容易注意到的是,相比从地球上看月球,在月球上看地球要大得多。原因很好理解,地球的直径几乎是月球的4倍以上,在相同的距离上当然要大上4倍。 还有,从月球上看,地球不会东升西落,相反它是固定在天空中的。舒普拉指出:“尽管从月球上看,地球会经历类似月球那...",
+      "publishedAt": "2019/07/04 00:00:00",
+      "site": "科普中国网",
+      "host": "kepuchina.cn",
+      "kind": "搜索摘要",
+      "id": "S11",
+      "query": "月球背面 是否永远没有阳光 黑夜 科学解释",
+      "retrievedAt": "2026-10-24T01:21:17.663Z"
+    },
+    {
+      "url": "https://science.nasa.gov/?p=211468/",
+      "title": "Twice-Lit Moon",
+      "excerpt": "Twice-Lit Moon September 15, 2009 PIA Number PIA11580 Language english Two sources of light illuminate the textured surface of the moon Enceladus. On the right of the image, sunlight bathes the anti-Saturn side of this geologically active moon. Saturnshine dimly lights the Saturn-facing side of the moon on the left of the image. The moon's surface is scarred by fractures, folds, and ridges. This view looks toward the trailing hemisphere of Enceladus (504 kilometers, or 313 miles across). North on Enceladus is up. The image was taken in visible light with the Cassini spacecraft narrow-angle camera on July 26, 2009. The view was acquired at a distance of approximately 199,000 kilometers (124,000 miles) from Enceladus and at a Sun-Enceladus-spacecraft, or phase, angle of 97 degrees. Image scale is about 1 kilometer (3,281 feet) per pixel. The Cassini-Huygens mission is a cooperative project of NASA, the European Space Agency and the Italian Space Agency. The Jet Propulsion Laboratory, a division of the California Institute of Technology in Pasaden...",
+      "publishedAt": "2009/09/15 00:00:00",
+      "site": "美国国家航天航空局",
+      "host": "science.nasa.gov",
+      "kind": "搜索摘要",
+      "id": "S15",
+      "query": "NASA 月球背面 光照情况 官方原始资料",
+      "retrievedAt": "2026-10-24T01:21:18.114Z"
+    },
+    {
+      "url": "https://www.kepuchina.cn/article/articleinfo?business_type=100&ar_id=600242",
+      "title": "为什么我们永远看不到月球的“背面”?",
+      "excerpt": "为什么我们永远看不到月球的“背面”? 重庆市九龙坡区科普创作与传播学会 重庆市九龙坡区科普创作与传播学会 收集整理国内外新观点,及时有效地向业界会员进行宣传和引导。 每当夜晚抬头望月,我们看到的总是月球相似的“面孔”——布满明暗交错的月海和高地。然而,你是否好奇过:月球的另一面是什么样子?为什么我们永远看不到它的“背面”? 答案其实与一种奇妙的天文现象有关——“潮汐锁定”。 潮汐锁定:月球为何“一面朝向”地球? 月球并非静止不动,它一边围绕地球公转,一边也在自转。按理说,我们应该能逐渐看到它的各个部分。但事实上,月球的自转周期(约27.3天)和它的公转周期(绕地球一周的时间)完全相同,这使得它始终以同一面朝向地球。 这种现象被称为“潮汐锁定”(Tidal Locking),或“同步自转”。 潮汐锁定的形成原因 1、地球的引力拉扯: l 月球并非完美刚体,早期它的自转速度比现在快得多。 l 地球的引力对月球产生潮汐力,导致月球轻微形变,形成“潮汐隆起”。 l 这种形变产生摩擦力,逐渐减慢月球的自转,直到自转周期与公转周期同步。 2、漫长的减速过程: l 这一过程可能持续了数亿年,最终使月球被“锁定”,永远一面对着地球。 “月球背面”≠“黑暗面” 许多人误以为月球背面永远是黑暗的,其实不然。由于月球仍然在自转,背面也会经历白天和黑夜,只是地球上的观测者永远看不到它。 l 当月球背面朝向太阳时:那里是白天,温度可达127℃。 l 当月球背面背向太阳时:那里是黑夜,温度可降至-173℃。 人类如何探索月球背面? 虽然从地球...",
+      "publishedAt": "2025/05/09 00:00:00",
+      "site": "科普中国网",
+      "host": "kepuchina.cn",
+      "kind": "搜索摘要",
+      "id": "S2",
+      "query": "月球背面永远没有阳光、一直是黑夜，这个说法是真的吗？",
+      "retrievedAt": "2026-10-24T01:21:16.850Z"
+    },
+    {
+      "url": "https://www.toutiao.com/article/6562707864803082766/",
+      "title": "地球上为啥永远看不到月球背面?",
+      "excerpt": "地球上为啥永远看不到月球背面? 2018-06-03 12:18 · 中国科学技术馆 中国月球探测工程首席科学家欧阳自远院士解释说,月球一直在按照反时针方向自转,同时月球还围绕着地球反时针方向公转。我们站在地球上看它转一圈,这不就是背面和正面都能看见了吗?但为什么在地球上就看不见背面?月亮和地球的关系特别奇特,月亮自转一圈就是它的一天与绕着地球公转一圈的时间相等。 月亮一边自转一边绕着地球公转,月亮永远就是一半朝向地球。月亮绕地球公转一圈需要接近一个月,而它自传一圈也是接近一个月,因而月亮上的一天接近我们地球上的一个月,白天半个月,晚上半个月。很多人认为月亮的那半边永远不朝向地球就永远是黑暗的,所谓的“黑月亮”,这是误解。 月亮这边是白天,背后就是黑夜,背后天亮了,这边是黑夜,所以一天是一个月。嫦娥三号落在月亮上要过夜,晚上约有半个月长,零下180摄氏度,我们的探测仪器全部的电子学线路要冻坏。我们在仪器箱里装了暖气,暖气是什么东西做的呢?原子能电池一直在放热,使温度保持在零下40摄氏度以上。第二天天亮了又能够继续工作了。 本文来自:北京科技报...",
+      "publishedAt": "2018/06/03 12:18:16",
+      "site": "今日头条",
+      "host": "toutiao.com",
+      "kind": "搜索摘要",
+      "id": "S12",
+      "query": "月球背面 是否永远没有阳光 黑夜 科学解释",
+      "retrievedAt": "2026-10-24T01:21:17.663Z"
+    },
+    {
+      "url": "https://nasa.gov/reference/moonbase-environment",
+      "title": "The Lunar South Pole Region - NASA",
+      "excerpt": "The Lunar South Pole Region The Lunar South Pole region is an environment of extremes that offers unique opportunities for scientific discovery, exploration, and an enduring human presence. Captured by the Artemis II crew, the heavily cratered eastern edge of the South Pole-Aitken basin — the Moon’s oldest and largest impact basin — offers a glimpse into billions of years of lunar geologic history. NASA Overview Light and Shadow Water Ice and Other Frozen Materials Rugged Terrain Lunar Dust Learning to Live and Work on the Moon Overview NASA plans to establish the Moon Base in the lunar South Pole region, a place unlike anywhere humans have explored before. Its ancient terrain, distinctive lighting conditions, and areas of persistent shadow make it an important destination for scientific discovery and the future of human lunar exploration. Some of the same characteristics that make this region so valuable also present challenges for living and working there. Its environment will influence nearly every aspect of surface operations, from landing and mobility to power generation, equipment performance, and scientific work. Understanding those conditions is fundamental to building the Moon Base. With each mission, NASA will learn more about how to operate in this environment, building the knowledge and experience needed for an enduring human presence on the Moon. Learning to live and work in this region will push the boundaries of science, engineering, and human capability. Light and Shadow Duration -:- Remaining Time --:- Picture-in-PictureFullscreen Beginning of dialog window. Escape will cancel and close the window. TextColorWhiteBlackRedGreenBlueYellowMagentaCyanOpacityOpaqueSemi-Transparent Text BackgroundColorBlackWhiteRedGreenBlueYellowMagentaCyanOpacityOpaqueSemi-TransparentTransparent Caption Area BackgroundColorBlackWhiteRedGreenBlueYellowMagentaCyanOpacityTransparentSemi-TransparentOpaque Font Size50%75%100%125%150%175%200%300%400% Text Edge StyleNoneRaisedDepressedUniformDropshadow Font FamilyProportional Sans-SerifMonospace Sans-SerifProportional SerifMonospace SerifCasualScriptSmall Caps This visualization shows six months of changing light and shadow near the lunar South Pole, compressed into two and a half minutes. The Sun remains close to the horizon, casting long shadows that move across the rugged terrain. Depending on the surrounding topography, some locations experience extended periods of sunlight while others remain in darkness. NASA's S...",
+      "publishedAt": "2026/09/28 00:00:00",
+      "site": "美国国家航天航空局",
+      "host": "nasa.gov",
+      "kind": "搜索摘要",
+      "id": "S16",
+      "query": "NASA 月球背面 光照情况 官方原始资料",
+      "retrievedAt": "2026-10-24T01:21:18.114Z"
+    },
+    {
+      "url": "https://big5.cctv.com/gate/big5/tv.cctv.com/2019/04/24/ARTIV3I6Q38Mfi1bHbiu4dJo190424.shtml",
+      "title": "《飛向月球》:到月球背面去!開創人類的第一次",
+      "excerpt": "宋代大文學家蘇軾曾經感嘆“月有陰晴圓缺”,如果你經常“舉頭望明月”就會發現,無論月亮圓缺如何變化,月面上明暗區域的相對位置卻幾乎是不變的。月亮凝望地球的臉,從來不曾有過改變。 從古至今,地球上的人類就一直不曾看到過它的背面。 “嫦娥四號”為何要去月球背面進行探索? 2018年12月8日凌晨,執行嫦娥四號發射任務的長征3號乙火箭已經矗立在2號發射塔架上,嫦娥四號即將出發踏上探月征程。這一次,嫦娥四號的目標是月球的背面。 中國工程院院士、中國探月工程總設計師吳偉仁介紹説,“對未知的世界保持探索的慾望,這是我們人類的天性。在確定嫦娥四號何去何從的時候,我們覺得到月球背面去,開創一下人類的第一次。” 為何人類在地球上,無法看到月球的背面? 宇宙空間中所有天體都會遵循萬有引力的規律,地球與月球也不例外。由於它們之間巨大引力的方向與它們各自繞軸線自轉的方向不一致,於是便産生了互相拉拽的效果,減慢了它們各自的自轉速度。直到月球自轉一圈的時間和它繞地球公轉一圈的時間相同了,都是大約28天,月球終於被地球鎖定,成了一個“雙面人”。 月球背面與正面大不相同 雖然月球始終只有一面朝向着地球,但這並不意味着它的背面是一個永遠黑暗的世界。在農曆每月的月初、月末,它的背面恰恰是被太陽直射,一片光明。 與月球正面不同,月球背面主要是高地和山脈,密布着隕石坑,環形山比正面多了很多。 有科學家認為,因為沒有大氣層的保護,小天體會毫無阻力地直接撞向月球,帶來猛烈的撞擊甚至大爆炸。 超過100千米的隕石坑 由於月面上沒有風雨的洗刷與猛烈的地質構造活動,所以撞擊形成的環形坑就一直保留下來。在月面上,小的月坑直徑只有幾米甚至更小,大的直徑超過100千米,直徑大於1千米的環形坑總數達33000多個,佔月球表面積的7%-10%。 為“嫦娥”搭建“鵲橋”,建立與地球的通信聯絡 在月球正面,我們可以直接和地球進行通信聯絡。但嫦娥四號登陸的是月球背面。它發出的無線電波無法繞過月球,與地球直接聯繫,所以嫦娥四號抵達月球後首先面對的難題就是通信關。 科學家們在月球的上空安裝一面“反射鏡”,將無線電波通過反射的方式到達地球,保持聯絡。 2018年5月21日,長征4號丙火箭一飛沖天。嫦娥四號的“先鋒官”**中繼星“鵲橋”...",
+      "publishedAt": "2019/04/24 10:55:00",
+      "site": "央视国际",
+      "host": "big5.cctv.com",
+      "kind": "搜索摘要",
+      "id": "S3",
+      "query": "月球背面永远没有阳光、一直是黑夜，这个说法是真的吗？",
+      "retrievedAt": "2026-10-24T01:21:16.850Z"
+    },
+    {
+      "url": "http://yqast.cn/kpzs/201606/t20160608_325509.html",
+      "title": "月亮的颜色与气候",
+      "excerpt": "2015年7月有两次月圆之夜,一次发生在7月1日,另一次发生在7月31日。在天文术语中,同一个月份如果能看到两次满月,第二次月亮称作蓝月亮。民间也有蓝月亮预示着灾难的说法。7月31日人们看到的满月是蓝月亮吗?它真的是不祥的征兆吗? 月色朦胧,树影婆娑 其实,天文术语中的蓝月亮并不指蓝色的月亮。蓝月亮这个词主要起源于西方国家。大约400年前,当人们提起蓝月亮时, 就好像“把白色说成黑色”一样荒谬。蓝月亮后来引申为“从来不会发生”的事。英语中说,当月亮变成蓝色时,这件事才会发生,就好比我们经常说,当太阳从西边升起时一样。英语中的谚语Once in a blue moon,就意味着几乎不会发生的事情。 那么天文中的蓝月亮究竟是什么意思呢?根据历法计算,两次满月之间大约相隔29.5天左右,而我们采用的公历中有的月份为31天,有的月份为30天,这就出现了一个时间差。这个时间差会导致一个月内可能出现两次满月,也会导致一年中有可能出现13次满月。这多出来的月亮就是蓝月亮,是意料之外的月亮的意思,它在天文术语里有两种解释。 第一种:19世纪和20世纪早期,美国缅因州的农历中给当地农民列出了蓝月亮的日期。指出在通常情况下,一个季度有3个满月。如果在一个季度中发生了4次满月,第三次满月被称作蓝月亮。 第二种:1946年,美国人在《天空和望远镜》杂志中的一篇文章“Once in a Blue Moon”中误解了缅因州农历中的解释,将19年中存在7次蓝月亮误解为在这19年中,有7年时间每年会有13次满月,也就是,其中11个月中每月有1次满月,另外一个月有两次满月,将同一个月中的第二次满月称为蓝月亮。后来,这种解释的蓝月亮被使用。1980年美国电台广播节目“Star Date”使用这种定义的蓝月亮。蓝月亮作为同一个月中的第二次满月被广泛传播并接受。 天空会出现蓝色的月亮吗? 通常情况下,月亮是红黄色的,人们很少能够看到蓝色的月亮。只有当火山爆发或森林着火时,它们产生的火山灰、烟雾或尘埃粒子抛到大气中,这些粒子散射蓝光,这时的月亮看起来才是蓝色的。 蓝月亮预示着灾难并没有科学的根据。但是,人们看到蓝月亮与地球上有火山爆发或森林发生大火有关。 1883年,印尼的喀拉喀托火山爆发,像一个威力庞大的原子弹爆炸,火山灰飘到地球大气层的高处,使月亮出现蓝色近两年。1951年发生在加拿大的森林火灾使烟雾或尘埃粒子漂浮在大气中,人们看到了蓝色的月亮。1980年美国圣海伦火山、1983年墨西哥的艾尔奇冲火山以及1991年菲律宾皮纳图博的火山爆发后,人们也都看到了蓝色的月亮。 能够看到蓝色月亮最关键的因素是空气中存在许多直径略大于0.7微米且小于1微米的粒子。通常情况下,这种状况在大气中是罕见的,只有当火山爆发或森林发生火灾时,才会产生很多这种尺度的粒子,它们倾向于散射蓝光,这时人们才会看到蓝色的月亮。 所以,2015年7月31日人们看到的月亮是“蓝月亮”,但不是蓝色的月亮。 红月亮?蓝月亮?灰月亮? 通常人们仰望星空,看到的月亮是红黄色的,那么在什么情况下,会出现不同颜色的月亮? 空间卫星上拍摄的月球照片是灰色的。因为月亮的表面主要由氧、硅、铁、钙、铝等组成。其中颜色较深的部分是月亮上的黑斑,形貌很像地球上的海洋,叫月海、雨海、静海、云海等。组成月海的主要是玄武岩,颜色比较黑,对太阳的反光比较弱,所以看上去比周围月陆区暗一些。除了这些黑色斑块以外,颜色较浅的部分是月亮上的陆地,也称为月陆,平均高出月海2000~3000米,也称为月球高地。组成月陆的岩石主要是斜长岩,它们的颜色比较浅,看上去比月海明亮。 人们从地球上看月亮是穿过地球的大气层看到的月亮,它并不是真实的月亮的颜色,而是经过大气散射后的月亮颜色。太阳光经过大气后,一部分波长的光被散射掉,而另一部分波长的光可以直接穿过。 当月亮出现在地平线附近时,光几乎通过所有的大气,大部分蓝光被散射掉,红光并没有被散射,这时的月亮看起来是红色的。当月亮出现的高度增高时,它穿过的大气层很薄,这时月亮看起来是黄白色的。 当发生月全食时,月亮并不会完全消失。因为地球有大气层,太阳光穿过大气层时,波长较短的蓝光被大气散射掉了,剩下波长较长的红光,所以,我们会看到红月...",
+      "publishedAt": "2016/06/08 10:21:00",
+      "site": "yqast.cn",
+      "host": "yqast.cn",
+      "kind": "搜索摘要",
+      "id": "S13",
+      "query": "月球背面 是否永远没有阳光 黑夜 科学解释",
+      "retrievedAt": "2026-10-24T01:21:17.663Z"
+    },
+    {
+      "url": "https://kepuchina.cn/yskx/xkkx/201604/t20160415_7684.shtml",
+      "title": "你不知道的月球",
+      "excerpt": "在世界各地我们都可以找到人类膜拜月球的印记。中国神话传说中的嫦娥家喻户晓,嫦娥奔月的故事穿越千年流传至今仍然有着巨大的魅力,这从中国第一个探月工程以“嫦娥”命名就可见一斑。每到中秋节,美丽的嫦娥会在舞台上讲述一个动人的传说。古希腊神话中月亮女神阿耳忒弥斯是奥林匹斯十二主神(希腊宗教中最受崇拜的十二位神)之一,她掌管狩猎,照顾妇女分娩,代表女性美及贞洁,深受人民的爱戴。在艺术家的眼中,阿尔忒弥斯清新秀丽,像月亮一样有着美丽而神圣的面容。由此可见,不管是在东方还是西方,月亮都是美的化身。 月球背面的秘密 虽然身世扑朔迷离,但是作为地球唯一的卫星以及唯一一个人类到达过的地外星球,相比较其他天体,我们对月球还是有比较多的了解。只不过,长期以来我们不曾见过月球背面的“庐山真面目”。 由于月球的自转周期等于它绕着地球公转的周期,因此月球永远以同一面朝向着地球。这种现象也被称为潮汐锁定。正是因为如此,在航天时代到来之前,人类对月球的认识也仅仅局限于面向我们的这一面(我们可以简单地称之为“正面”,另一面则称为“背面”)。通过早期的观测,我们把这一面分成两部分:明亮的区域称为“月陆”,较暗的区域称为“月海”。进一步的研究发现,月海的纬度比月陆低,充盈其中的较暗的物质是月球火山在以前的活动周期中喷发出来的固态玄武岩;月陆是没有被玄武岩覆盖的区域,它由远古时期的表面岩石、斜长岩和被陨石碰撞出的物质组成。 在很长一段时间里,月球的背面对人类来说都是一个谜。直到1959年苏联月球3号探测器拍摄到了第一张月球背面的影像。1968年美国阿波罗8号执行环绕月球的任务时,宇航员首次直接用眼睛看到了月球背面,人类这才可以一窥月球背面的“庐山真面目”。宇航员...",
+      "publishedAt": "2016/04/15 00:00:00",
+      "site": "科普中国网",
+      "host": "kepuchina.cn",
+      "kind": "搜索摘要",
+      "id": "S17",
+      "query": "NASA 月球背面 光照情况 官方原始资料",
+      "retrievedAt": "2026-10-24T01:21:18.114Z"
+    },
+    {
+      "url": "https://m.chinanews.com/wap/detail/cht/zw/ft8730219.shtml",
+      "title": "人類第一次成功軟着陸於月球背面 你的樣子很美",
+      "excerpt": "你的樣子 月球暗面沐浴在陽光之中,如一片灰亮大海。新年第二天,“嫦娥四號”落在月球南極艾特肯盆地的鬆軟土壤中,幾乎沒有一點揚塵。這是人類第一次成功軟着陸於月球背面,並傳回對這片區域第一張近距離拍攝的照片。一天後,“玉兔二號”月球車緩緩滑下斜坡,張着雙翼似的太陽能板,留下兩條清晰的“足印”。 這一次,我們觸碰月亮不願意展示給人類的那張臉。月亮繞着地球,示人的始終是同一面,大約佔月球表面積的56%。這是潮汐鎖定的功勞:大小天體的引力互相牽制,像橡皮圈兒拴着的兩隻玻璃球,小的那個自己轉着還繞着大的轉,慢了趕兩步,快了拖一拖,自轉速度和公轉速度越來越一致。無法看見的背面,被稱作月球遠端,也就是月球暗面。 和受恆星照耀的所有天體一樣,月球永遠有一部分迎着光,另一部分沒入黑暗。只在地球人所見的滿月時,月球暗面才完全沉浸在陰影裏。這張臉在每個公轉週期裏,幾乎能獲得與另一面龐同等的陽光。月球一日,持續近709小時。按地球時間計,白天黑夜都是兩週。 通俗稱謂裏“月球暗面”的“暗”字非指黑暗,意爲隱祕。直到1959年,人類才第一次知道它大概是個什麼樣子——蘇聯的“月球三號”傳回一些質量不算好的照片,一窺它大約三分之一的面積。照片裏,月球暗面像坑坑窪窪的土豆表面。那時距離第一顆進入行星軌道的人造衛星“實普尼克一號”上天不過兩年,地球人還不能算完全準備好。9年後,阿波羅8號的飛行員第一次以人類的眼睛直接觀察了這片封閉千萬年的領域。 親臨需要更久的醞釀。暗面的風貌與我們熟悉的那輪明月截然不同。月球的近地面有大片大片的“月海”,凹陷的玄武岩平原,從地球看則是一塊塊黑斑。科學家曾一度懷疑那裏有水的存在。月暗面則峯谷林立,是親見的宇航員人人推測降落艱難的兇險之處。 阿波羅計劃的宇航員最常被問到的話題之一是,何時去月球背面走走?答案則一直是:等等吧,通信太差了。暗面受到遮蔽,接收不了來自地球的無線電波。阿波羅8號繞月飛行經過月背時,需要經歷10分鐘的對地信號中斷。那可能是當時休斯敦太空指揮中心很多人生命中最長的10分鐘。 中國團隊的嫦娥四號於2018年12月8日出發,在當年的倒數第二天進入預定的月球背面着陸準備軌道。名爲“鵲橋”的中繼星起了關鍵作用,這顆孜孜不倦的通信衛星真如神話中連結仙界凡間的不可思議之橋一般,爲“嫦娥”在信號不通的月背與地球聯繫服務。 “玉兔二號”的足跡,距離人類第一次踏足月球那既小又大的一步,已經過去了半個世紀。蘇聯曾搶先命名了月球背面的諸多景觀,在當時的冷戰背景中繃緊了無數神經,引發了宇宙殖民的競爭焦慮。後來,月球背面命名的國際規則確定下來,大國野望也隨時代變遷凋零而去。 宇宙無垠無限...",
+      "publishedAt": "2019/01/16 09:14:02",
+      "site": "中国新闻网",
+      "host": "m.chinanews.com",
+      "kind": "搜索摘要",
+      "id": "S4",
+      "query": "月球背面永远没有阳光、一直是黑夜，这个说法是真的吗？",
+      "retrievedAt": "2026-10-24T01:21:16.850Z"
+    },
+    {
+      "url": "https://kepu.gmw.cn/astro/2018-05/17/content_32956100.htm",
+      "title": "【漫画科普】欧阳院士告诉你月亮背面的秘密",
+      "excerpt": "2018年底,我国将发射嫦娥四号探测器,实现人类首次月球背面着陆探测。 与前几次嫦娥任务不同, 这次任务会先在2018年5月发射中继星“鹊桥”,使其到达预定位置。“鹊桥”的任务是建立落在月球背面的嫦娥四号与地球之间的通讯联系,确保科学数据能够传输回地球。 我们将通过三期漫画,为大家介绍月球背面的科学和故事。 为什么只能看到月球正面? 月球自西向东以逆时针方向自转,同时也围绕地球以逆时针方向公转。由于“潮汐锁定”,月球自转一周的周期与围绕地球公转一周的周期相等,约为28个地球日。 最终形成了月球始终以“正面”朝向地球,“背面”始终背向地球的状态。 由于月球的“天平动”,在地球上能看到59%的月面,几乎整个月球背面难觅真容。 没有大气层会怎样? 月球的表面没有大气层包围,接近于真空,这也直接导致了和地球的许多与众不同之处。 月球表面不刮风、不下雨、空中没有云层,没有任何天气变化。不论是白昼还是夜晚,月球的天空一直是漆黑的。 在月球上仰望星空,与在地球上相比会更璀璨;在月球背面看星星,它们会比在月球正面看更明亮。 由于没有大气层,月球没有介质传导声音,因而月球表面是一个没有任何声响的世界,是一个死寂的世界。 月球表面也没有温度的传导,昼夜温差极大。月表平均温度为白昼107℃,最高达到130℃;夜晚平均温度为-153℃,最低达到-180℃。 月球表面都有啥? 1609年,伽利略第一次用自制望远镜看到了月球表面。伽利略看到月球正面布满了暗色的巨大斑块,他把这些认为是月球上的海洋,由于海水反光弱,因此呈现出暗色的斑块。这些暗色斑块被命名为“月海”,如雨海、丰富海、静海、风暴洋等。 后来人们发现其实月球表面一点液态水也没有,这些巨大的暗色斑块是31~39亿年前,由玄武岩堆积形成的广阔平原。 与月海对应,月球正面颜色明亮的部分被称为月陆,它比月海高出2000-3000米,由月球早期岩浆分异形成的斜长岩组成。这类岩石颜色较浅,能反射出更多的太阳光。由于形成的早,裸露在月表的时间较长,因此月陆上的撞击坑比月海上的更密...",
+      "publishedAt": "2018/05/17 16:36:00",
+      "site": "光明网",
+      "host": "kepu.gmw.cn",
+      "kind": "搜索摘要",
+      "id": "S14",
+      "query": "月球背面 是否永远没有阳光 黑夜 科学解释",
+      "retrievedAt": "2026-10-24T01:21:17.663Z"
+    },
+    {
+      "url": "https://www.nasachina.cn/?p=36477",
+      "title": "盈凸月",
+      "excerpt": "The waxing gibbous moon rises above Earth’s blue atmosphere in this photograph taken from the International Space Station on Oct. 3, 2025, as it orbited 263 miles above a cloudy Atlantic Ocean off the coast of Quebec, Canada. In our entire solar system, the only object that shines with its own light is the Sun. That light always beams onto Earth and the Moon from the direction of the Sun, illuminating half of our planet in its orbit and reflecting off the surface of the Moon to create moonlight. Sometimes the entire face of the Moon glows brightly. Other times we see only a thin crescent of light. Sometimes the Moon seems to disappear. These shifts are called Moon phases. The waxing gibbous phase comes just bef...",
+      "publishedAt": "2025/12/02 00:00:00",
+      "site": "www.nasachina.cn",
+      "host": "nasachina.cn",
+      "kind": "搜索摘要",
+      "id": "S18",
+      "query": "NASA 月球背面 光照情况 官方原始资料",
+      "retrievedAt": "2026-10-24T01:21:18.114Z"
+    },
+    {
+      "url": "https://m.gmw.cn/2024-05/03/content_1303728397.htm",
+      "title": "瞄准17时27分!嫦娥六号计划今日发射,目标月球背面",
+      "excerpt": "今天(3日), 国家航天局发布最新消息, 长征五号遥八运载火箭 目前已经开始加注液氧低温推进剂。 探月工程四期嫦娥六号任务 计划今天17时至18时实施发射任务, 首选发射窗口瞄准17时27分。 三大关键技术首次应用 嫦娥六号原本是嫦娥五号的备份,在嫦娥五号任务成功后,它被赋予了新的使命,将前往月球背面采集月球样品并带回地球。为了完成这项艰巨的任务,科研人员为他设计了三大关键技术,第一项就是突破月球逆行轨道设计与控制技术。 中国航天科技集团 逯运通: 嫦娥六号其实是嫦娥五号的备份星,要实现月球背面南半球采样返回任务,如果还要沿用嫦娥五号的轨道,就必须在落月的时候,整个着陆上升组合体要翻转180度,是大一点的技术状态更改。但是使用逆行轨道就可以巧妙解决这个问题,探测器尽量能够维持住它成功的技术状态,来实现月球背面采样返回的任务。 除了采用逆行轨道,嫦娥六号在到达预定位置后,还将应用月背智能采样技术和月背起飞上升技术,实施月球背面自动采样返回。 嫦娥六号任务工程总体发射场工程技术组组长 胡震宇: 实施月球背面采样返回工程难度大,科学和工程意义大。嫦娥六号飞行控制是中国当前最复杂的,主要经历环月飞行段、月面工作段、月面上升段11个飞行阶段。需要同时对多个目标进行测控和高精度测定轨,飞控事件多、环节紧凑、控制过程复杂。 嫦娥六号此次奔月的任务都有啥 截至目前,全世界从月球带回来的样品都是来自月球正面,月球背面的月壤到底是什么样,引发了全球科学家的好奇。为了能一探究竟,嫦娥六号这次任务就要做第一个吃螃蟹的。 为了顺利带回月球背面的样品,科研人员为嫦娥六号设计了11个阶段的飞行任务。 中国航天科技集团 逯运通: 首先它搭乘长征五号运载火箭发射入轨,进入奔月过程。到达月球附近,我们踩刹车进入环月的轨道,整个探测器绕着环月轨道飞行。飞行过程中,着陆器和上升器组合体择机落到月球背面。完成月背采样后,上升器携带采集的月壤从月球背面起飞,与轨返组合体交会对接,把月球样品传递给返回器。之后返回地球,以半弹道跳跃式方式再入大气层,返回我们国家的四子王旗着陆场。 嫦娥六号任务将沿用嫦娥五号的采集方式,使用钻取和表取两种采样方式,获得不同层面和深度的样品,并在月球背面同步开展科学探测。 嫦娥六号任务工程总体发射场工程技术组组长 胡震宇: 南极的艾特肯盆地是月球三大地体之一,是月球上最古老、最深的撞击坑盆地,具有重要的科研价值。嫦娥六号实施月球背面着陆区的现场勘察和分析,获取月球样品,在实验室分析不同地域、不同年龄月壤的结构、物理特性、物质组成,这对人类更加全面认识月球,深化月球成因和演化,行星演化以及太阳系起源等研究具有重要的意义。 月球怎么还分正反面? 为何探索月背更难? 月球是地球唯一的天然卫星,它对地球地轴指向、自转稳定、周期潮汐、夜晚照明等有着巨大意义。可以说,离开了月球,地球根本不会是今天这种光景。 由于地球强大引力的影响,月球也付出了很大代价:地球将它的自转周期减慢为与围绕地球公转周期完全一样,也就是潮汐锁定。在这种效应下,身处地球的人类基本永远只看到月球的“正面”,只能在月球的“天秤动”效应下(月球轨道是椭圆,在轨道不同点的公转速度不同,月球自转也相对地球轨道面有一定倾角)看到月球“背面”一小部分(积累下来的极限是18%)。但总体来看,人类是无法看全月球背面的。 不过,月球背面并不是永恒的黑夜,所谓“月之暗面”是不存在的。这是因为,月球是永远以一面朝向地球,而不是以一面朝向太阳。月球表面每个地方都会有白天和晚上,月亮上的“一天”大约是地球上的28天,所以“广寒宫”里的白天大概相当于我们“人间”的14天,夜晚也是大约14天。 而且,需要澄清一点,月球背面没有外星人或者二战时期逃亡过去的军队!人类对月...",
+      "publishedAt": "2024/05/03 16:00:00",
+      "site": "光明网",
+      "host": "m.gmw.cn",
+      "kind": "搜索摘要",
+      "id": "S5",
+      "query": "月球背面永远没有阳光、一直是黑夜，这个说法是真的吗？",
+      "retrievedAt": "2026-10-24T01:21:16.850Z"
+    },
+    {
+      "url": "https://www.nasa.gov/solar-system/moon/nasa-study-highlights-importance-of-surface-shadows-in-moon-water-puzzle/",
+      "title": "NASA Study Highlights Importance of Surface Shadows in Moon Water Puzzle - NASA",
+      "excerpt": "NASA Study Highlights Importance of Surface Shadows in Moon Water Puzzle Jet Propulsion Laboratory A Closer Look The Moon is covered with craters and rocks, creating a surface “roughness” that casts shadows, as seen in this photograph from the 1972 Apollo 17 mission. These cold shadows may allow water ice to accumulate as frost even at daytime. The area of detail is highlighted in the following illustration. Credits: NASA The shadows cast by the roughness of the Moon’s surface create small cold spots for water ice to accumulate even during the harsh lunar daytime. Scientists are confident that water ice can be found at the Moon’s poles inside permanently shadowed craters – in other words, craters that never receive sunlight. But observations show water ice is also present across much of the lunar surface, even during daytime. This is a puzzle: Previous computer models suggested any water ice that forms during the lunar night should quickly burn off as the Sun climbs overhead. “Over a decade ago, spacecraft detected the possible presence of water on the dayside surface of the Moon, and this was confirmed by NASA’s Stratospheric Observatory for Infrared Astronomy [SOFIA] in 2020,” said Björn Davidsson, a scientist at NASA’s Jet Propulsion Laboratory in Southern California. “These observations were, at first, counterintuitive: Water shouldn’t survive in that harsh environment. This challenges our understanding of the lunar surface and raises intriguing questions about how volatiles, like water ice, can survive on airless bodies.” In a new study, Davidsson and co-author Sona Hosseini, a research and instrument scientist at JPL, suggest that shadows created by the “roughness” of the lunar surface provide refuge for water ice, enabling it to form as surface frost far from the Moon’s poles. They also explain how the Moon’s exosphere (the tenuous gases that act like a thin atmosphere) may have a significant role to play in this puzzle. This illustration zooms in on the area of detail indicated in the previous photo, showing how shadows enable water ice to survive on the sunlit lunar surface. When shadows move as the Sun tracks overhead, the exposed frost lingers long enough to be detected by spacecraft. Credits: NASA/JPL-Caltech Water Traps and Frost Pockets Many computer models simplify the lunar surface, rendering it flat and featureless. As a result, it’s often assumed that the surface far from the poles heats up uniformly during lunar daytime, which would make...",
+      "publishedAt": "2021/08/02 00:00:00",
+      "site": "美国国家航天航空局",
+      "host": "nasa.gov",
+      "kind": "搜索摘要",
+      "id": "S19",
+      "query": "NASA 月球背面 光照情况 官方原始资料",
+      "retrievedAt": "2026-10-24T01:21:18.114Z"
+    },
+    {
+      "url": "https://www.toutiao.com/article/6707420255968297476/",
+      "title": "欧阳院士告诉你月亮背面的秘密①",
+      "excerpt": "欧阳院士告诉你月亮背面的秘密① 2019-06-28 11:36 · 光明网 2018年底,我国将发射嫦娥四号探测器,实现人类首次月球背面着陆探测。 与前几次嫦娥任务不同, 这次任务会先在2018年5月发射中继星“鹊桥”,使其到达预定位置。“鹊桥”的任务是建立落在月球背面的嫦娥四号与地球之间的通讯联系,确保科学数据能够传输回地球。 我们将通过三期漫画,为大家介绍月球背面的科学和故事。 为什么只能看到月球正面? 月球自西向东以逆时针方向自转,同时也围绕地球以逆时针方向公转。由于“潮汐锁定”,月球自转一周的周期与围绕地球公转一周的周期相等,约为28个地球日。 最终形成了月球始终以“正面”朝向地球,“背面”始终背向地球的状态。 由于月球的“天平动”,在地球上能看到59%的月面,几乎整个月球背面难觅真容。 没有大气层会怎样? 月球的表面没有大气层包围,接近于真空,这也直接导致了和地球的许多与众不同之处。 月球表面不刮风、不下雨、空中没有云层,没有任何天气变化。不论是白昼还是夜晚,月球的天空一直是漆黑的。 在月球上仰望星空,与在地球上相比会更璀璨;在月球背面看星星,它们会比在月球正面看更明亮。 由于没有大气层,月球没有介质传导声音,因而月球表面是一个没有任何声响的世界,是一个死寂的世界。 月球表面也没有温度的传导,昼夜温差极大。月表平均温度为白昼107℃,最高达到130℃;夜晚平均温度为-153℃,最低达到-180℃。 月球表面都有啥? 1609年,伽利略第一次用自制望远镜看到了月球表面。伽利略看到月球正面布满了暗色的巨大斑块,他把这些认为是月球上的海洋,由于海水反光弱,因此呈现出暗色的斑块。这些暗色斑块被命名为“月海”,如雨海、丰富海、静海、风暴洋等。 后来人们发现其实月球表面一点液态水也没有,这些巨大的暗色斑块是31~39亿年前,由玄武岩堆积形成的广阔平原。 与月海对应,月球正面颜色明亮的部分被称为月陆,它比月海高出2000-3000米,由月球早期岩浆分异形成的斜长岩组成。这类岩石颜色较浅,能反射出更多的太阳光。由于形成的早,裸露在月表的时间较长,因此月陆...",
+      "publishedAt": "2019/06/28 11:36:15",
+      "site": "今日头条",
+      "host": "toutiao.com",
+      "kind": "搜索摘要",
+      "id": "S6",
+      "query": "月球背面永远没有阳光、一直是黑夜，这个说法是真的吗？",
+      "retrievedAt": "2026-10-24T01:21:16.850Z"
+    },
+    {
+      "url": "https://www.nasa.gov/wp-content/uploads/static/history/alsj/WOTM/WOTM-EnviroIntro.html",
+      "title": "Overview of the Lunar Work Environment",
+      "excerpt": "Overview of the Lunar Work Environment Copyright © 2007 by the Editors of Working on the Moon. Last revised 18 February 2008. Although the lunar work environment is extreme by any terrestrial standards, with the exception of major solar particle events, it is highly predictable. Because the Moon has no appreciable atmosphere and, necessarily, no clouds, the amount of sunlight falling on a given spot is determined solely by the site latitude, the Moon's orbital motion around the Earth, and the Earth's motion around the Sun. Temperature cycles can be predicted with high accuracy far into the future, which can greatly simplify the thermal design of equipment and structures. Most of the lunar surface is covered with a layer of impact debris, called the regolith, which is usually several meters thick and most of it very fine. During future lunar operations, the regolith can be a curse - in the form of fine, invasive, troublesome dust particles. It can also be a blessing as a firm foundation for construction projects and as a source of some construction materials and of shielding material for protection against solar energetic particle events. The lunar surface is littered with impact craters. For the most part, the craters are randomly distributed. Larger craters are much less numerous than smaller ones. Because of the large number of craters and the frequency of overlap, Lunar Rover crews found the driving to be \"sporty\". Although any particular patch of ground has been hit many times over the course of lunar history, on human timescales impacts are infrequent. The Moon's surface gravity is 1/6th that of Earth. Weaker surface gravity means that vehicles and structures need not be as solidly built as on Earth. During Apollo, although the astronauts had to wear pressure suits when they were outside the Lunar Module, they found that (1) running and many other forms of physical activity were easier than on Earth, (2) they could take advantage of objects falling much more slowly than they do on Earth; and (3), unlike the weightless environment of a spacecraft in free flight, they could put an object down on a flat surface and know that it would stay put. Above all, the Apollo astronauts thought 1/6th gravity was great fun. Shadows on the Moon can be darker than on Earth but, in most circumstances there is enough light scattered off the lunar surface to give good visibility, particularly with protective visors raised. The Rover-mounted, auto-irised TV camera had no ...",
+      "publishedAt": "",
+      "site": "美国国家航天航空局",
+      "host": "nasa.gov",
+      "kind": "搜索摘要",
+      "id": "S20",
+      "query": "NASA 月球背面 光照情况 官方原始资料",
+      "retrievedAt": "2026-10-24T01:21:18.114Z"
+    },
+    {
+      "url": "https://news.qq.com/rain/a/20250924A0195X00",
+      "title": "极简科普丨月球的背面也被人称作“月球的黑暗面”,但实际上,月球的正面和背面都会经历昼夜变化_腾讯新闻",
+      "excerpt": "极简科普丨月球的背面也被人称作“月球的黑暗面”,但实际上,月球的正面和背面都会经历昼夜变化 吉林省科学技术协会主办,致力于传播科学思想,分享科技生活,提高公众科学素质 月球背面没有阳光\"这种说法,可能跟月亮的\"潮汐锁定\"有关。因为月球围绕地球公转的周期恰好和月球的自转周期相同,所以会出现\"潮汐锁定\"现象,即月球始终保持同一个面朝向地球。这个朝向地球的面是月球的正面,从地球上看不见的那一面是背面,月球的背面也被人称作\"月球的黑暗面\",这个叫法容易让人产生误解,认为它是永远黑暗不见阳光的。但实际上,月球的正面和背面都会经历昼夜变化(月球上的一个昼夜大致相当于地球上的29.5天)。 来源丨科学辟谣 初审 | 陈嘉琦、李书豪 复审 | 魏星华 终审 | 韩永林...",
+      "publishedAt": "2025/09/24 07:01:00",
+      "site": "腾讯新闻",
+      "host": "news.qq.com",
+      "kind": "搜索摘要",
+      "id": "S7",
+      "query": "月球背面永远没有阳光、一直是黑夜，这个说法是真的吗？",
+      "retrievedAt": "2026-10-24T01:21:16.850Z"
+    },
+    {
+      "url": "https://science.nasa.gov/moon/moonlight",
+      "title": "Moonlight",
+      "excerpt": "Moonlight Image credit: Astrofili Ceriana Contents What is Moonlight? The View From Home What Color is the Moon? The “Man in the Moon” and Other Stories LRO: A Closer Look What is Moonlight? The Moon does not make its own light. \"Moonlight” is actually reflected sunlight. At any moment, half of the Moon is brightly sunlit (this is the day side). The other half is in the dark (this is the night side). Throughout the month, as the Moon rotates and orbits, day and night occur on different parts of its surface, just like on Earth. Unlike our planet, though, the Moon takes a whole month to complete one rotation. This means that lunar day and night are each about two Earth weeks long. This visualization uses Lunar Reconnaissance Orbiter data to show the stark beauty of evolving light and shadow near sunrise and sunset on the rugged lunar surface. NASA’s Scientific Visualization Studio. The View From Home We always see the same face of the Moon from Earth—the “lunar nearside.” Each month, as day and night sweep across the lunar nearside, the sunlit part of our view takes on a series of familiar shapes: crescent, half-moon, full, and more. Moon phases are really just the overlap between lunar daylight and the Moon’s Earth-facing side. » Learn about Moon phases What Color is the Moon? From here on Earth, the sunlit part of the Moon usually looks bright, almost white. This is an illusion. The brightness of the Sun’s reflected light makes it difficult to see the Moon’s actual color from a distance. A closer look reveals that much of the Moon’s scenery comes in shades of dark gray, like rocks found near volcanoes on our own world. The Moon has volcanic rock from ancient lava flows ― and these dark-colored materials absorb most of the visible light that reaches them. Earth Moon On the slopes of Hawaii’s Kilauea Volcano, researchers use aerial cameras and hand-held science instruments to characterize their surroundings. NASA/Andrea Jones NASA EarthMoon Similar Landscapes, Different Worlds Kilauea and Hadley Rille CurtainToggle Image Details Left: Apollo 15 astronaut at work near Hadley Rille on the Moon. Right: NASA researchers on the slopes of Hawaii’s Kilauea Volcano. Both regions were formed by volcanic activity, and both pictures were taken in daylight. NASA/Andrea Jones Overall, only about one-tenth of the sunlight that hits the Moon is reflected back into space. This ratio of reflected light is called albedo. For comparison, our watery planet bounces about three-t...",
+      "publishedAt": "2023/06/06 18:06:03",
+      "site": "美国国家航天航空局",
+      "host": "science.nasa.gov",
+      "kind": "搜索摘要",
+      "id": "S21",
+      "query": "NASA 月球背面 光照情况 官方原始资料",
+      "retrievedAt": "2026-10-24T01:21:18.114Z"
+    },
+    {
+      "url": "https://cn.chinadaily.com.cn/a/201901/16/WS5c3ece90a31010568bdc3fd3.html",
+      "title": "人类第一次成功软着陆于月球背面 你的样子很美",
+      "excerpt": "人类第一次成功软着陆于月球背面 你的样子很美 你的样子 月球暗面沐浴在阳光之中,如一片灰亮大海。新年第二天,“嫦娥四号”落在月球南极艾特肯盆地的松软土壤中,几乎没有一点扬尘。这是人类第一次成功软着陆于月球背面,并传回对这片区域第一张近距离拍摄的照片。一天后,“玉兔二号”月球车缓缓滑下斜坡,张着双翼似的太阳能板,留下两条清晰的“足印”。 这一次,我们触碰月亮不愿意展示给人类的那张脸。月亮绕着地球,示人的始终是同一面,大约占月球表面积的56%。这是潮汐锁定的功劳:大小天体的引力互相牵制,像橡皮圈儿拴着的两只玻璃球,小的那个自己转着还绕着大的转,慢了赶两步,快了拖一拖,自转速度和公转速度越来越一致。无法看见的背面,被称作月球远端,也就是月球暗面。 和受恒星照耀的所有天体一样,月球永远有一部分迎着光,另一部分没入黑暗。只在地球人所见的满月时,月球暗面才完全沉浸在阴影里。这张脸在每个公转周期里,几乎能获得与另一面庞同等的阳光。月球一日,持续近709小时。按地球时间计,白天黑夜都是两周。 通俗称谓里“月球暗面”的“暗”字非指黑暗,意为隐秘。直到1959年,人类才第一次知道它大概是个什么样子——苏联的“月球三号”传回一些质量不算好的照片,一窥它大约三分之一的面积。照片里,月球暗面像坑坑洼洼的土豆表面。那时距离第一颗进入行星轨道的人造卫星“实普尼克一号”上天不过两年,地球人还不能算完全准备好。9年后,阿波罗8号的飞行员第一次以人类的眼睛直接观察了这片封闭千万年的领域。 亲临需要更久的酝酿。暗面的风貌与我们熟悉的那轮明月截然不同。月球的近地面有大片大片的“月海”,凹陷的玄武岩平原,从地球看则是一块块黑斑。科学家曾一度怀疑那里有水的存在。月暗面则峰谷林立,是亲见的宇航员人人推测降落艰难的凶险之处。 阿波罗计划的宇航员最常被问到的话题之一是,何时去月球背面走走?答案则一直是:等等吧,通信太差了。暗面受到遮蔽,接收不了来自地球的无线电波。阿波罗8号绕月飞行经过月背时,需要经历10分钟的对地信号中断。那可能是当时休斯敦太空指挥中心很多人生命中最长的10分钟。 中国团队的嫦娥四号于2018年12月8日出发,在当年的倒数第二天进入预定的月球背面着陆准备轨道。名为“鹊桥”的中继星起了关键作用,这颗孜孜不倦的通信卫星真如神话中连结仙界凡间的不可思议之桥一般,为“嫦娥”在信号不通的月背与地球联系服务。 “玉兔二号”的足迹,距离人类第一次踏足月球那既小又大的一步,已经过去了半个世纪。苏联曾抢先命名了月球背面的诸多景观,在当时的冷战背景中绷紧了无数神经,引发了宇宙殖民的竞争焦虑。后来,月球背面命名的国际规则确定下来,大国野望也随时代变迁凋零而去。 宇宙无垠无限秘密,人类越走越远,送了使者...",
+      "publishedAt": "2019/01/16 09:14:00",
+      "site": "中国日报网",
+      "host": "cn.chinadaily.com.cn",
+      "kind": "搜索摘要",
+      "id": "S8",
+      "query": "月球背面永远没有阳光、一直是黑夜，这个说法是真的吗？",
+      "retrievedAt": "2026-10-24T01:21:16.850Z"
+    },
+    {
+      "url": "https://www.theregister.com/2015/02/09/nasa_video_shows_dark_side_of_the_moon/",
+      "title": "BEHOLD the magnificent lunar backside in our MOON VIDEO",
+      "excerpt": "NASA proudly exhibits LRO montage Vid NASA has stitched together images from the Lunar Reconnaissance Orbiter to produce a stunning video showing what the moon looks like from The Other Side. It shows that there are many more, and larger craters than on the side which faces the Earth. What it doesn’t have is the large dark spots, called maria. The animation above shows craters of all sizes over the entire dark side. Although “dark” is a misnomer, the side we can’t see is illuminated by the Sun in just the same way as the Earth. The a slightly darker area covering the bottom third of the disk is one of the largest and oldest impact features in the solar system, the South Pole-Aitken basin. Roughly 2,500 kilometres (1,600 mi) in diameter and 13 kilometres (8.1 mi) deep, roughly the size of Northern and Southern Ireland combined. It was first spotted by the Soviet Luna 3 probe, which swung around the Moon in October, 1959 to get the very first picture...",
+      "publishedAt": "2015/02/09 15:56:00",
+      "site": "www.theregister.com",
+      "host": "theregister.com",
+      "kind": "搜索摘要",
+      "id": "S22",
+      "query": "NASA 月球背面 光照情况 官方原始资料",
+      "retrievedAt": "2026-10-24T01:21:18.114Z"
+    },
+    {
+      "url": "https://paper.people.com.cn/rmrbhwb/html/2018-05/19/content_1855585.htm",
+      "title": "月球鲜为人知的“另一面”",
+      "excerpt": "根据计划,中国将于2018年底发射嫦娥四号月球探测器,实现人类首次月球背面着陆探测。与前几次“嫦娥”探月任务不同, 这次实施嫦娥四号任务之前会先在本月发射中继星“鹊桥”,并使其到达预定位置。 “鹊桥”的使命正如其名字所描述的那样是一座架设在太空的“天桥”,旨在建立落在月球背面的嫦娥四号与地球测控中心之间的通讯联系,确保两者之间的数据传输。 月球只以 正面示人为啥 月球自西向东以逆时针方向自转,同时也围绕地球以逆时针方向公转。由于“潮汐锁定”,月球自转一周的周期与围绕地球公转一周的周期相等,约为28个地球日。最终形成了月球始终以“正面”朝向地球,“背面”始终背向地球的状态。 由于月球的“天平动”,在地球上能看到59%的月面,几乎整个月球背面难觅真容。 没有大气层会怎样?月球的表面没有大气层包围,接近于真空,这也直接导致了和地球的许多与众不同之处。 月球表面不刮风、不下雨、空中没有云层,没有任何天气变化。不论是白昼还是夜晚,月球的天空一直是漆黑的。在月球上仰望星空,与在地球上相比会更璀璨;在月球背面看星星,会比在月球正面看更明亮。 由于没有大气层,月球没有介质传导声音,因而月球表面是一个没有任何声响的世界,是一个死寂的世界。月球表面也没有温度的传导,昼夜温差极大。月表平均温度为白昼107摄氏度,最高达到130摄氏度;夜晚平均温度为-153摄氏度,最低达到-180摄氏度。 月球背面 究竟都有啥 1609年,伽利略第一次用自制望远镜看到了月球表面。伽利略看到月球正面布满了暗色的巨大斑块,他把这些认为是月球上的海洋,由于海水反光弱,因此呈现出暗色的斑块。这些暗色斑块被命名为“月海”,如雨海、丰富海、静海、风暴洋等。 后来人们发现其实月球表面一点液态水也没有,这些巨大的暗色斑块是31亿—39亿年前,由玄武岩堆积形成的广阔平原。 与月海对应,月球正面颜色明亮的部分被称为月陆,它比月海高出2000-3000米,由月球早期岩浆分异形成的斜长岩组成。这类岩石颜色较浅,能反射出更多的太阳光。 由于形成得早,裸露在月表的时间较长,因此月陆上的撞击坑比月海上的更密集。这些撞击坑都以著名科学家和思想家的名字来...",
+      "publishedAt": "2018/05/19 00:00:00",
+      "site": "人民网",
+      "host": "paper.people.com.cn",
+      "kind": "搜索摘要",
+      "id": "S9",
+      "query": "月球背面永远没有阳光、一直是黑夜，这个说法是真的吗？",
+      "retrievedAt": "2026-10-24T01:21:16.850Z"
+    },
+    {
+      "url": "https://www.nasa.gov/?p=996557/",
+      "title": "Challenging Conditions at the Lunar South Pole",
+      "excerpt": "Challenging Conditions at the Lunar South Pole Building an enduring human presence at the lunar South Pole means designing for extremes—from rugged terrain and challenging lighting conditions to dramatic temperatures and abrasive lunar dust. Captured by the Artemis II crew, the heavily cratered eastern edge of the South Pole-Aitken basin — the Moon’s oldest and largest impact basin — offers a glimpse into billions of years of lunar geologic history. NASA Overview Extreme Temperatures and Lighting Rugged Terrain Lunar Dust Overview NASA selected the lunar South Pole region as the location for its Moon Base because of the area’s unique scientific value and potential to support long-term exploration. But many of the characteristics that make this region so valuable also make it an extraordinarily challenging place to live and work. Extreme and highly variable temperatures, abrasive lunar dust, rugged terrain, and difficult lighting conditions all present major challenges for sustained surface operations. Establishing an enduring human presence in this environment will require more than simply adapting systems and operations designed for shorter missions. NASA and its partners will need to develop resilient technologies and infrastructure, carefully plan where and how surface assets are placed and operated, and learn how to keep equipment functioning safely and reliably over longer periods on the lunar surface. Extreme Temperatures and Lighting To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video Caption Area BackgroundColorBlackWhiteRedGreenBlueYellowMagentaCyanOpacityTransparentSemi-TransparentOpaque Text Edge StyleNoneRaisedDepressedUniformDrop shadow Font FamilyProportional Sans-SerifMonospace Sans-SerifProportional SerifMonospace SerifCasualScriptSmall Caps End of dialog window. This visualization shows six months of changing light and shadow near the lunar South Pole, compressed into two and a half minutes. From this vantage point, the Sun remains close to the horizon, casting extremely long shadows that move across the rugged terrain as the Sun circles the lunar sky. Periods of darkness can occur even when the Sun is above the horizon, as distant mountains and other elevated terrain block its low-angle light. NASA's Scientific Visualization Studio The lunar South Pole has a dramatically different lighting and thermal environment than the equatorial regions explored during Apollo. Near the pole, t...",
+      "publishedAt": "2026/08/10 00:00:00",
+      "site": "美国国家航天航空局",
+      "host": "nasa.gov",
+      "kind": "搜索摘要",
+      "id": "S23",
+      "query": "NASA 月球背面 光照情况 官方原始资料",
+      "retrievedAt": "2026-10-24T01:21:18.114Z"
+    },
+    {
+      "url": "https://m.chinanews.com/wap/detail/cht/zw/ft9841590.shtml",
+      "title": "人工智能算法“照亮”月球永久陰影區",
+      "excerpt": "科技日報北京8月31日電 (實習記者張佳欣)以瑞士蘇黎世理工大學爲首的一個國際研究小組利用人工智能算法觀察到月球上的永久陰影區。該人工智能有望“照亮”永久的陰影區,尤其是那些儘管旋轉但自然陽光仍無法到達的區域。這項近期刊載於《地球物理研究快報》上的研究也包含在美國國家航空航天局(NASA)“阿爾忒彌斯1號”任務計劃中,有助於爲其將來的登月計劃確定着陸點。 據澳大利亞《科學警報》雜誌報道,認爲月球有“暗”面是一種常見的誤解。因爲月球有自轉,所以月球也是有晝夜的,只不過月球只有一面面向地球,地球上的觀測者看不到其“暗”面。然而,也有部分區域永遠不會接收到任何光照:在高緯度地區和月球極地地區,有些深坑和凹坑有“高牆”保護隕石坑底部不受強烈太陽輻射的影響。 研究人員認爲,月球上這些神祕的坑洞中可能存在許多未被發現的東西,比如“水”。 在NASA月球勘測軌道飛行器(LRO)的幫助下,研究人員設法分析了隕石坑內部。輸入一種名爲HORUS的機器學習算法,可以清理LRO數據中的噪音,並揭示潛伏在月球陰影中的物體。該團隊利用HORUS對阿爾忒彌斯計劃勘探區中44個直徑超過40米的永久陰影區域進行了成像。 研究人員表示,目前阿爾忒彌斯任務宇航服在寒冷的隕石坑陰影區中使用時間僅爲2小時,新研究將幫助規劃探索月球永久陰影區的路線,讓宇航員和機器人最大限度利用時間。 研究人員還指出,月球南極地區之所以如此引人入勝,是因爲月球的軸向傾斜,太陽在...",
+      "publishedAt": "2022/09/01 03:37:04",
+      "site": "中国新闻网",
+      "host": "m.chinanews.com",
+      "kind": "搜索摘要",
+      "id": "S10",
+      "query": "月球背面永远没有阳光、一直是黑夜，这个说法是真的吗？",
+      "retrievedAt": "2026-10-24T01:21:16.850Z"
+    },
+    {
+      "url": "http://bgimg.ce.cn/xwzx/gnsz/gdxw/201901/19/t20190119_31303901.shtml",
+      "title": "揭秘:嫦娥四号为何有月昼工作和月夜休眠两种模式?",
+      "excerpt": "图为玉兔二号巡视器全景相机对嫦娥四号着陆器成像。中国国家航天局供图 中新网北京1月19日电 (郭超凯)嫦娥四号为何有月昼工作和月夜休眠两种模式?中国国家航天局探月与航天工程中心19日给出官方解答,为应对月夜长期无光照和极端低温环境的技术难题,科研团队将嫦娥四号探测器月面模式分为月昼工作模式和月夜休眠模式,“劳逸结合”。 据介绍,与地球相似,月球也进行自转运动,因此月球上也像地球一样有白天和黑夜之分。不过,由于月球自转一周的时间等于一个恒星月(27天7小时43分11.47秒),月球上一天的时间大约相当于地球的1个月。一个白天的时间大约相当于地球的14天,黑夜的时间大约也相当于地球的14天。 月夜期间无光照,没有太阳辐射外热流,月表红外热流也很小,以及月球没有大气,月壤导热系数小,进入月夜后,月表温度会很快降低至-180℃左右。长时间的深低温环境,对月球探测器的生存技术提出了严峻的挑战。 嫦娥四号探测器1月3日着陆月球背面以来,先后完成着陆器与巡视器两器分离与两器互拍,并开展科学探测活动。随着嫦娥四号着陆区进入月夜,巡视器与着陆器分别于1月12日和1月13日相继进入月夜休眠模式。 为应对月夜长期无光照和极端低温环境对嫦娥四号探测器提出的技术难题,科研团队将嫦娥四号探测器月面模式分为月昼工作模式和月夜休眠模式。月昼工作模式下,嫦娥四号着陆器与巡视器各分系统设备正常工作,开展月面科学探测任务,其中月午期间巡视器进入“午休”模式。月夜休眠模式下,嫦娥四号着陆器与巡视器所有设备除定时控制电路以及月夜温度采集器外,全部断电,不进行科学探测任务。为确保着陆器、巡视器及其科学载荷安全度过月夜,通过引入放射性同位素热源,在月夜期间供应热量,保证设备仪器的存储温度要求,解决无光照和极端低温的难题。(完) (责任编辑:符仲明)...",
+      "publishedAt": "2019/01/19 18:39:00",
+      "site": "中国经济网",
+      "host": "bgimg.ce.cn",
+      "kind": "搜索摘要",
+      "id": "S24",
+      "query": "NASA 月球背面 光照情况 官方原始资料",
+      "retrievedAt": "2026-10-24T01:21:18.114Z"
+    }
+  ],
+  "verdict": "unknown",
+  "summary": "该说法不成立。月球背面是因潮汐锁定始终背向地球、无法从地球直接观测到的半球，并非永远处于黑夜；由于月球存在自转，其背面同样会经历昼夜交替，单昼夜周期约相当于地球28-29.5天，白天会被太阳照射，夜晚才会进入黑暗。",
+  "evidence": [],
+  "limitations": [
+    "本次核验基于公开科普类搜索摘要，未涉及月球极地极个别永久阴影区域（如深陨石坑底部）的特殊光照情况说明，但该部分区域不改变月球背面整体存在昼夜交替的事实。",
+    "有效引用不足两个独立站点，不能给出确定判断。",
+    "依据元宝搜索返回的摘要，未抓取原始网页全文。"
+  ],
+  "trace": [
+    {
+      "stage": "plan",
+      "message": "接收委托，拆解待核验命题。",
+      "at": "2026-10-24T01:21:12.857Z"
+    },
+    {
+      "stage": "search",
+      "message": "元宝搜索 · 第 1/3 轮",
+      "at": "2026-10-24T01:21:16.647Z",
+      "query": "月球背面永远没有阳光、一直是黑夜，这个说法是真的吗？"
+    },
+    {
+      "stage": "sources",
+      "message": "取回 10 条摘要，去重后 10 条。",
+      "at": "2026-10-24T01:21:16.850Z",
+      "query": "月球背面永远没有阳光、一直是黑夜，这个说法是真的吗？",
+      "requestId": "4034ad89-b857-40f2-81e7-dc52795293ef",
+      "count": 10,
+      "notice": ""
+    },
+    {
+      "stage": "search",
+      "message": "元宝搜索 · 第 2/3 轮",
+      "at": "2026-10-24T01:21:16.850Z",
+      "query": "月球背面 是否永远没有阳光 黑夜 科学解释"
+    },
+    {
+      "stage": "sources",
+      "message": "取回 10 条摘要，去重后 14 条。",
+      "at": "2026-10-24T01:21:17.663Z",
+      "query": "月球背面 是否永远没有阳光 黑夜 科学解释",
+      "requestId": "61fea7b9-e14f-4231-97aa-91a0072a7114",
+      "count": 10,
+      "notice": ""
+    },
+    {
+      "stage": "search",
+      "message": "元宝搜索 · 第 3/3 轮",
+      "at": "2026-10-24T01:21:17.663Z",
+      "query": "NASA 月球背面 光照情况 官方原始资料"
+    },
+    {
+      "stage": "sources",
+      "message": "取回 10 条摘要，去重后 24 条。",
+      "at": "2026-10-24T01:21:18.114Z",
+      "query": "NASA 月球背面 光照情况 官方原始资料",
+      "requestId": "c32f55ee-53ff-4759-b15b-e851df1fa1b7",
+      "count": 10,
+      "notice": ""
+    },
+    {
+      "stage": "compare",
+      "message": "交叉核对来源、原文片段与适用条件。",
+      "at": "2026-10-24T01:21:18.115Z"
+    },
+    {
+      "stage": "review",
+      "message": "同一模型第二轮复核：寻找反例与证据缺口。",
+      "at": "2026-10-24T01:21:39.490Z"
+    },
+    {
+      "stage": "complete",
+      "message": "证据整理完毕，正在打印调查报告。",
+      "at": "2026-10-24T01:22:05.223Z"
+    }
+  ]
+}

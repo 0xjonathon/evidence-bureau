@@ -1,0 +1,234 @@
+{
+  "sourceModel": "Sakurada_Fumiriya",
+  "license": "CC0-1.0",
+  "humanoid": {
+    "hips": "J_Bip_C_Hips",
+    "leftUpperLeg": "J_Bip_L_UpperLeg",
+    "rightUpperLeg": "J_Bip_R_UpperLeg",
+    "leftLowerLeg": "J_Bip_L_LowerLeg",
+    "rightLowerLeg": "J_Bip_R_LowerLeg",
+    "leftFoot": "J_Bip_L_Foot",
+    "rightFoot": "J_Bip_R_Foot",
+    "spine": "J_Bip_C_Spine",
+    "chest": "J_Bip_C_Chest",
+    "neck": "J_Bip_C_Neck",
+    "head": "J_Bip_C_Head",
+    "leftShoulder": "J_Bip_L_Shoulder",
+    "rightShoulder": "J_Bip_R_Shoulder",
+    "leftUpperArm": "J_Bip_L_UpperArm",
+    "rightUpperArm": "J_Bip_R_UpperArm",
+    "leftLowerArm": "J_Bip_L_LowerArm",
+    "rightLowerArm": "J_Bip_R_LowerArm",
+    "leftHand": "J_Bip_L_Hand",
+    "rightHand": "J_Bip_R_Hand",
+    "leftToes": "J_Bip_L_ToeBase",
+    "rightToes": "J_Bip_R_ToeBase",
+    "leftEye": "J_Adj_L_FaceEye",
+    "rightEye": "J_Adj_R_FaceEye",
+    "leftThumbProximal": "J_Bip_L_Thumb1",
+    "leftThumbIntermediate": "J_Bip_L_Thumb2",
+    "leftThumbDistal": "J_Bip_L_Thumb3",
+    "leftIndexProximal": "J_Bip_L_Index1",
+    "leftIndexIntermediate": "J_Bip_L_Index2",
+    "leftIndexDistal": "J_Bip_L_Index3",
+    "leftMiddleProximal": "J_Bip_L_Middle1",
+    "leftMiddleIntermediate": "J_Bip_L_Middle2",
+    "leftMiddleDistal": "J_Bip_L_Middle3",
+    "leftRingProximal": "J_Bip_L_Ring1",
+    "leftRingIntermediate": "J_Bip_L_Ring2",
+    "leftRingDistal": "J_Bip_L_Ring3",
+    "leftLittleProximal": "J_Bip_L_Little1",
+    "leftLittleIntermediate": "J_Bip_L_Little2",
+    "leftLittleDistal": "J_Bip_L_Little3",
+    "rightThumbProximal": "J_Bip_R_Thumb1",
+    "rightThumbIntermediate": "J_Bip_R_Thumb2",
+    "rightThumbDistal": "J_Bip_R_Thumb3",
+    "rightIndexProximal": "J_Bip_R_Index1",
+    "rightIndexIntermediate": "J_Bip_R_Index2",
+    "rightIndexDistal": "J_Bip_R_Index3",
+    "rightMiddleProximal": "J_Bip_R_Middle1",
+    "rightMiddleIntermediate": "J_Bip_R_Middle2",
+    "rightMiddleDistal": "J_Bip_R_Middle3",
+    "rightRingProximal": "J_Bip_R_Ring1",
+    "rightRingIntermediate": "J_Bip_R_Ring2",
+    "rightRingDistal": "J_Bip_R_Ring3",
+    "rightLittleProximal": "J_Bip_R_Little1",
+    "rightLittleIntermediate": "J_Bip_R_Little2",
+    "rightLittleDistal": "J_Bip_R_Little3",
+    "upperChest": "J_Bip_C_UpperChest"
+  },
+  "boneCount": 107,
+  "clips": [
+    "Sitting_Idle_Loop",
+    "Sitting_Talking_Loop",
+    "Driving_Loop",
+    "PickUp_Table",
+    "Interact",
+    "Idle_Loop"
+  ],
+  "blink": [
+    {
+      "name": "Neutral",
+      "presetName": "neutral",
+      "binds": [],
+      "materialValues": []
+    },
+    {
+      "name": "A",
+      "presetName": "a",
+      "binds": [
+        {
+          "mesh": 0,
+          "index": 23,
+          "weight": 100
+        }
+      ],
+      "materialValues": []
+    },
+    {
+      "name": "I",
+      "presetName": "i",
+      "binds": [
+        {
+          "mesh": 0,
+          "index": 24,
+          "weight": 100
+        }
+      ],
+      "materialValues": []
+    },
+    {
+      "name": "U",
+      "presetName": "u",
+      "binds": [
+        {
+          "mesh": 0,
+          "index": 25,
+          "weight": 100
+        }
+      ],
+      "materialValues": []
+    },
+    {
+      "name": "E",
+      "presetName": "e",
+      "binds": [
+        {
+          "mesh": 0,
+          "index": 26,
+          "weight": 100
+        }
+      ],
+      "materialValues": []
+    },
+    {
+      "name": "O",
+      "presetName": "o",
+      "binds": [
+        {
+          "mesh": 0,
+          "index": 27,
+          "weight": 100
+        }
+      ],
+      "materialValues": []
+    },
+    {
+      "name": "Blink",
+      "presetName": "blink",
+      "binds": [
+        {
+          "mesh": 0,
+          "index": 10,
+          "weight": 100
+        }
+      ],
+      "materialValues": []
+    },
+    {
+      "name": "Blink_L",
+      "presetName": "blink_l",
+      "binds": [
+        {
+          "mesh": 0,
+          "index": 12,
+          "weight": 100
+        }
+      ],
+      "materialValues": []
+    },
+    {
+      "name": "Blink_R",
+      "presetName": "blink_r",
+      "binds": [
+        {
+          "mesh": 0,
+          "index": 11,
+          "weight": 100
+        }
+      ],
+      "materialValues": []
+    },
+    {
+      "name": "Angry",
+      "presetName": "angry",
+      "binds": [
+        {
+          "mesh": 0,
+          "index": 2,
+          "weight": 100
+        }
+      ],
+      "materialValues": []
+    },
+    {
+      "name": "Fun",
+      "presetName": "fun",
+      "binds": [
+        {
+          "mesh": 0,
+          "index": 0,
+          "weight": 100
+        }
+      ],
+      "materialValues": []
+    },
+    {
+      "name": "Joy",
+      "presetName": "joy",
+      "binds": [
+        {
+          "mesh": 0,
+          "index": 3,
+          "weight": 100
+        }
+      ],
+      "materialValues": []
+    },
+    {
+      "name": "Sorrow",
+      "presetName": "sorrow",
+      "binds": [
+        {
+          "mesh": 0,
+          "index": 1,
+          "weight": 100
+        }
+      ],
+      "materialValues": []
+    },
+    {
+      "name": "Surprised",
+      "presetName": "unknown",
+      "binds": [
+        {
+          "mesh": 0,
+          "index": 4,
+          "weight": 100
+        }
+      ],
+      "materialValues": []
+    }
+  ],
+  "sourceMotion": "Quaternius Universal Animation Library Standard"
+}

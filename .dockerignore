@@ -1,0 +1,11 @@
+.env
+.env.*
+node_modules
+.git
+*.blend
+*.blend1
+docs
+scripts
+tests
+
+.tools

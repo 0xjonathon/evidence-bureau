@@ -1,0 +1,50 @@
+import test from 'node:test';
+import {Quaternion} from 'three';
+import assert from 'node:assert/strict';
+import {createDeskPhysics} from '../public/desk-physics.js';
+import {V,SOLIDS,TIMES,deskTask,DESK_PAPER,SCAN_PAPER,REPORT_STATION} from '../public/desk-layout.js';
+import {STAMP_CAP_RADIUS,STAMP_CAP_Y,stampGripPoint,stampGripNormal,approachGrip,carryingContact,stampAction,crossAction,penAction,penGripPoint,visitorPutdown,visitorPickup} from '../public/desk-performance.js';
+import {createActors} from './support/standard-actors.mjs';
+import {poseDetective,poseViewer} from '../public/standard-actor.js';
+import {pose,life} from '../public/clips.js';
+function skinVertices(actor){const list=[];actor.model.traverse(mesh=>{if(!mesh.isSkinnedMesh||!/SKIN/.test(mesh.material?.name||''))return;const g=mesh.geometry,ids=new Set(mesh.skeleton.bones.map((b,i)=>/J_Bip_[LR]_(?:LowerArm|Hand|Thumb|Index|Middle|Ring|Little)/.test(b.name)?i:-1)),vertices=[];for(let i=0;i<g.attributes.position.count;i++){let w=0;for(let j=0;j<4;j++)if(ids.has(g.attributes.skinIndex.array[i*4+j]))w+=g.attributes.skinWeight.array[i*4+j];if(w>.8)vertices.push(i);}list.push({mesh,vertices});});return list;}
+function assertOutside(vertices,label){for(const{mesh,vertices:ids}of vertices)for(const i of ids){const p=V().fromBufferAttribute(mesh.geometry.attributes.position,i);mesh.applyBoneTransform(i,p).applyMatrix4(mesh.matrixWorld);for(const solid of SOLIDS)assert.ok(!['x','y','z'].every(k=>Math.abs(p[k]-solid.p[k])<solid.size[k]/2-.001),`${label}: skinned vertex ${i} inside ${solid.name} at ${p.toArray()}`);}}
+function localGrip(actor,p,forward=V(0,0,1),normal=V(0,1,0),kind=null,weight=1){return{position:actor.root.worldToLocal(p.clone()),forward,normal,kind,weight};}
+test('the actual paper rigid body traverses the integrated chassis without blocked sweeps, including fast playback',async()=>{
+ for(const speed of [1,5]){const physics=await createDeskPhysics();try{for(const name of ['submit','return','result']){physics.newSheet(name==='return'?SCAN_PAPER:name==='result'?deskTask(name,0).point:DESK_PAPER);let result;for(let t=0;t<TIMES[name]+1/120;t+=speed/120){const task=deskTask(name,Math.min(t,TIMES[name]));result=physics.step(speed/120,task.point,task.held||task.owner==='instrument');assert.ok(result.position.distanceTo(task.point)<.16,`${name}: paper failed to follow its collision-free path`);}assert.equal(result.blocked,0);assert.ok(result.position.distanceTo(deskTask(name,TIMES[name]).point)<.025);}}finally{physics.dispose();}}
+});
+test('the native skin and fingertips clear every desk/device volume while following the actual simulated paper',async()=>{
+ for(const name of ['submit','return','result']){const{detective:d}=createActors(),vertices=skinVertices(d),physics=await createDeskPhysics();physics.newSheet(name==='return'?SCAN_PAPER:name==='result'?deskTask(name,0).point:DESK_PAPER);try{for(let frame=0;frame<TIMES[name]*30;frame++){const t=frame/30,task=deskTask(name,t),actual=physics.step(1/30,task.point,task.held||task.owner==='instrument');if(!task.held)continue;d.root.position.set(task.root,1.48,-.75);d.root.updateMatrixWorld(true);const c=carryingContact(name,actual.position);c.position=d.root.worldToLocal(c.position);const result=poseDetective(d,pose('idle',t),life(t),{}, {l:localGrip(d,V(-.47,1.85,-.14)),r:c},{state:'sequence',sequence:name,time:t,taskLean:.38,collision:true});assert.ok(result.miss<.002,`${name}/${t}: arm cannot reach`);assert.ok(d.arms.r.wristBend<=Math.PI*32/180+.001,`${name}/${t}: wrist over-bent`);d.root.updateMatrixWorld(true);assertOutside(vertices,`${name}/${t}`);}}finally{physics.dispose();}}
+});
+
+test('stamp and pen contact the report at the work station with reachable, collision-free native hands',()=>{
+ for(const verdict of ['supported','refuted','mixed','unknown']){const{detective:d}=createActors(),vertices=skinVertices(d);for(let i=0;i<=150;i++){const t=7.9+i*.042;d.root.position.set(deskTask('result',t).root,1.48,-.75);d.root.updateMatrixWorld(true);let g;if(verdict==='supported'){const a=stampAction(t,REPORT_STATION);g=localGrip(d,approachGrip(V(-.47,1.85,-.14),stampGripPoint(a.position),a.weight),V(0,0,1),stampGripNormal(a.weight),'stamp',a.weight);}else{const tip=verdict==='refuted'?crossAction(t,REPORT_STATION).tip:REPORT_STATION.clone().add(V(-.30,.004,.15)),a=penAction(t,REPORT_STATION,tip);g=localGrip(d,approachGrip(V(-.47,1.85,-.14),penGripPoint(a.position,a.axis),a.weight),V(0,0,1),V(0,1,0),'pen',a.weight);g.wristFlex=a.wristFlex;g.flatness=a.flatness;}const contact=carryingContact('result',REPORT_STATION),grip=deskTask('result',t).grip,r=t<13.2?localGrip(d,V(.39,1.85,.18)):localGrip(d,V(.39,1.85,.18).lerp(contact.position,grip),contact.forward,contact.normal,'pinch',grip);const result=poseDetective(d,pose('idle',t),life(t),{}, {l:g,r},{state:'sequence',sequence:'result',time:t,taskLean:.38,collision:true});assert.ok(result.miss<.005,`${verdict}/${t}: tool unreachable ${result.miss}`);for(const arm of Object.values(d.arms)){assert.ok(arm.upperRoll<=1.58,`${verdict}/${t}: shoulder twist`);assert.ok(Math.abs(arm.forearmRoll)<=1.36,`${verdict}/${t}: forearm twist`);assert.ok(arm.wristBend<=.60,`${verdict}/${t}: wrist bend`);}d.root.updateMatrixWorld(true);assertOutside(vertices,`${verdict}/${t}`);if(verdict==='supported'&&stampAction(t,REPORT_STATION).weight>.999){const a=stampAction(t,REPORT_STATION),cap=a.position.clone().add(V(0,STAMP_CAP_Y,0));for(const{mesh,vertices:indices}of vertices)for(const i of indices){const p=V().fromBufferAttribute(mesh.geometry.attributes.position,i);mesh.applyBoneTransform(i,p).applyMatrix4(mesh.matrixWorld);assert.ok(p.distanceTo(cap)>=STAMP_CAP_RADIUS-.001,`stamp/${t}: skin intersects knob`);const y=p.y-a.position.y;if(y>.057&&y<.167){const r=Math.hypot(p.x-a.position.x,p.z-a.position.z),radius=.028-(y-.057)/.11*.003;assert.ok(r>=radius-.001,`stamp/${t}: skin intersects shaft`);}}}}}
+});
+test('the world-seated visitor reaches the entire writing area while retaining fixed arm lengths',()=>{
+ const{visitor:v}=createActors(),vertices=skinVertices(v);v.root.position.set(0,2.65,1.66);v.root.updateMatrixWorld(true);const axis=V(.35,1,.08).normalize();for(const x of[-.36,0,.34])for(const z of[.47,.60,.74]){const anchor=V(x,1.565,z).addScaledVector(axis,.105);const miss=poseViewer(v,{l:V(-.46,1.69,.8),r:anchor},{l:.5,r:.5},false,null,null,{clock:1,state:'writing',kind:'pen',rightFrame:{forward:V(0,0,-1),normal:V(0,1,0)},leftFrame:{forward:V(0,0,-1),normal:V(0,1,0)},collision:true});assert.ok(miss<.005,`visitor cannot reach ${x},${z}: ${miss}`);for(const arm of Object.values(v.arms)){assert.ok(arm.upper.scale.distanceTo(V(1,1,1))<1e-6);assert.ok(arm.upperRoll<=1.58);assert.ok(Math.abs(arm.forearmRoll)<=1.36);assert.ok(arm.wristBend<=.80);}v.root.updateMatrixWorld(true);assertOutside(vertices,`visitor/${x}/${z}`);}
+});
+
+test('the exported Blender chassis matches every runtime collision volume',async()=>{
+ const {readFile}=await import('node:fs/promises'),{GLTFLoader}=await import('three/addons/loaders/GLTFLoader.js'),{Box3}=await import('three');const b=await readFile(new URL('../public/assets/instrument-v9.glb',import.meta.url)),gltf=await new GLTFLoader().parseAsync(b.buffer.slice(b.byteOffset,b.byteOffset+b.length),'');gltf.scene.updateMatrixWorld(true);for(const s of SOLIDS.filter(s=>s.name.startsWith('instrument-'))){const mesh=gltf.scene.getObjectByName(s.name);assert.ok(mesh,`missing ${s.name}`);const box=new Box3().setFromObject(mesh);assert.ok(box.getCenter(V()).distanceTo(s.p)<1e-5);assert.ok(box.getSize(V()).distanceTo(s.size)<1e-5);}const screen=gltf.scene.getObjectByName('VisitorFacingAgentScreen');assert.ok(screen);const normal=V().fromBufferAttribute(screen.geometry.attributes.normal,0).applyQuaternion(screen.getWorldQuaternion(new (await import('three')).Quaternion()));assert.ok(normal.z>.99,'screen faces away from the visitor');
+});
+test('the chin rest and tapping index stay above the table through the full idle cycle',()=>{
+ const{detective:d}=createActors(),vertices=skinVertices(d);d.root.position.set(0,1.36,-.75);for(let i=0;i<100;i++){const t=i/20;d.root.updateMatrixWorld(true);const target=V(.45,1.573+.030*(.5+.5*Math.sin(t*3.4)),.33);const result=poseDetective(d,pose('idle',t),life(t),{}, {l:localGrip(d,V(-.13,2.31,0),V(0,1,0),V(0,0,1)),r:localGrip(d,target)},{state:'greet',taskLean:.32,collision:true,poles:{l:V(-.42,1.35,-.12)},handModes:{l:'chin',r:'tap'}});assert.ok(result.miss<.005);assert.ok(d.arms.r.end.getWorldPosition(V()).distanceTo(target)<.04);d.root.updateMatrixWorld(true);assertOutside(vertices,`idle/${t}`);}
+});
+
+test('the visitor releases the pen and withdraws above the desktop instead of through it',()=>{
+ const{visitor:v}=createActors(),vertices=skinVertices(v);v.root.position.set(0,2.65,1.66);v.root.updateMatrixWorld(true);
+ for(const x of[-.36,0,.34])for(const z of[.47,.60,.74]){const start=V(x,1.60,z),q=new Quaternion().setFromUnitVectors(V(0,1,0),V(.35,1,.08).normalize());
+ for(let frame=0;frame<=69;frame++){
+  const t=frame/60,a=visitorPutdown(t,start,q),miss=poseViewer(v,{l:a.left,r:a.right},{l:.5,r:.5},false,null,null,{clock:t,state:'sequence',kind:a.kind,gripWeight:a.gripWeight,rightFrame:a.frame,leftFrame:{forward:V(0,0,-1),normal:V(0,1,0)},collision:true});
+  assert.ok(miss<.005,`putdown/${t}: unreachable`);v.root.updateMatrixWorld(true);assertOutside(vertices,`putdown/${x}/${z}/${t}`); }
+ }
+});
+
+test('the visitor grasps the flat pen, then raises it to writing position without hand/table intersections',()=>{
+ const{visitor:v}=createActors(),vertices=skinVertices(v);v.root.position.set(0,2.65,1.66);v.root.updateMatrixWorld(true);
+ for(let frame=0;frame<=104;frame++){
+  const t=frame/40,a=visitorPickup(t,V(.2034,1.600,.516));
+  const miss=poseViewer(v,{l:V(-.46,1.69,.8),r:a.right},{l:.5,r:.5},false,null,null,{clock:t,state:'sequence',kind:'pen',rightFrame:a.frame,leftFrame:{forward:V(0,0,-1),normal:V(0,1,0)},collision:true});
+  assert.ok(miss<.005);v.root.updateMatrixWorld(true);assertOutside(vertices,`pickup/${t}`);
+ }
+});

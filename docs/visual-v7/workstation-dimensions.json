@@ -1,0 +1,119 @@
+[
+  {
+    "name": "desk",
+    "position": [
+      0,
+      1.45,
+      0.15
+    ],
+    "size": [
+      7.15,
+      0.2,
+      2.9
+    ]
+  },
+  {
+    "name": "writing-mat",
+    "position": [
+      0,
+      1.551,
+      0.42
+    ],
+    "size": [
+      2.1,
+      0.002,
+      1.38
+    ]
+  },
+  {
+    "name": "instrument-plinth",
+    "position": [
+      1.24,
+      1.608,
+      -0.32
+    ],
+    "size": [
+      1.14,
+      0.1,
+      1.04
+    ]
+  },
+  {
+    "name": "instrument-upper",
+    "position": [
+      1.24,
+      1.984,
+      -0.32
+    ],
+    "size": [
+      1.14,
+      0.46,
+      1.04
+    ]
+  },
+  {
+    "name": "instrument-back",
+    "position": [
+      1.24,
+      1.7,
+      -0.825
+    ],
+    "size": [
+      1.14,
+      0.092,
+      0.03
+    ]
+  },
+  {
+    "name": "instrument-left",
+    "position": [
+      0.685,
+      1.7,
+      -0.32
+    ],
+    "size": [
+      0.03,
+      0.092,
+      1.04
+    ]
+  },
+  {
+    "name": "instrument-right",
+    "position": [
+      1.795,
+      1.7,
+      -0.32
+    ],
+    "size": [
+      0.03,
+      0.092,
+      1.04
+    ]
+  },
+  {
+    "name": "instrument-glass",
+    "position": [
+      1.24,
+      2.218,
+      -0.32
+    ],
+    "size": [
+      1.02,
+      0.008,
+      0.88
+    ]
+  },
+  {
+    "name": "instrument-output",
+    "position": [
+      1.24,
+      1.686,
+      0.66
+    ],
+    "size": [
+      1.04,
+      0.016,
+      0.92
+    ]
+  }
+]

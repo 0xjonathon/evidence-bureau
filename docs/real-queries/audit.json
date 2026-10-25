@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-24",
+  "reports": [
+    {
+      "name": "01-venus",
+      "id": "EB-20261024-869E4C",
+      "verdict": "得到支持",
+      "searchRequests": 4,
+      "screenshotBytes": 70520
+    },
+    {
+      "name": "02-moon",
+      "id": "EB-20261024-C202D3",
+      "verdict": "被反驳",
+      "searchRequests": 3,
+      "screenshotBytes": 76800
+    },
+    {
+      "name": "03-sound",
+      "id": "EB-20261024-BF3F02",
+      "verdict": "被反驳",
+      "searchRequests": 3,
+      "screenshotBytes": 69693
+    }
+  ],
+  "successfulSearchRequests": 10,
+  "credentialsIncluded": false
+}
