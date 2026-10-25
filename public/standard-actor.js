@@ -155,6 +155,7 @@ export function poseDetective(actor,p,life,targets={},grips=null,context={}){
   const arm=actor.arms[side],position=actor.root.localToWorld((grips?.[side]?.position||targets[side]||V(...p[side])).clone());
   if(!grips?.[side]&&!targets[side])position.y=Math.max(1.75,position.y);
   const forward=grips?.[side]?.forward||V(0,0,1),normal=grips?.[side]?.normal||V(0,1,0),pole=context.poles?.[side]||V(side==='l'?-.52:.52,1.75,-.65);
+  arm.toolCollider=side==='l'?context.heldTool:null;
   const kind=grips?.[side]?.kind,weight=grips?.[side]?.weight??1;arm.toolFlex=grips?.[side]?.wristFlex??.18;arm.toolFlatness=grips?.[side]?.flatness??0;
   arm.transitionBase={kind:side==='l'?'chin':'tap',weight:side==='l'?(context.chinBlend??0):(context.tipBlend??0)};
   const style=kind||(side==='l'&&context.chinBlend!==undefined?'chin':context.handModes?.[side]==='chin'?'chin':context.handModes?.[side]==='tap'?'tap':'relaxed');

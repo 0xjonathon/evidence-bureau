@@ -26,5 +26,5 @@ export function detectivePerformance({name=null,state='greet',time:t=0,clock=0,w
    grips.l={...grip(rest.l.clone().lerp(penGripPoint(action.position,action.axis),travel).add(V(0,.08*Math.sin(travel*Math.PI),0)),'pen',action.weight),wristFlex:action.wristFlex,flatness:action.flatness};grips.l.anchorBlend=travel;tool={kind:'pen',...action,mark:cross.mark};
   }
  }
- return {grips,tool,context:{state,sequence:name,time:t,taskLean:.18+.32*workBlend,sideLean:.40*smooth(paper.x,.65,1.46)*workBlend,collision:true,humanoidMotion:true,stabilizeMotion:false,torsoYaw:.15*smooth(paper.x,.7,1.46)*workBlend,poles:{l:V(-.62,1.55,-.35),r:V(.35,1.35,-.75).lerp(V(1.05,2.15,-1.65),smooth(paper.y,1.85,2.35)*smooth(paper.x,.2,1.0))},handModes:{l:'chin',r:'tap'},tipBlend:1-workBlend,chinBlend:1-workBlend}};
+ return {grips,tool,context:{heldTool:tool,state,sequence:name,time:t,taskLean:.18+.32*workBlend,sideLean:.40*smooth(paper.x,.65,1.46)*workBlend,collision:true,humanoidMotion:true,stabilizeMotion:false,torsoYaw:.15*smooth(paper.x,.7,1.46)*workBlend,poles:{l:V(-.62,1.55,-.35),r:V(.35,1.35,-.75).lerp(V(1.05,2.15,-1.65),smooth(paper.y,1.85,2.35)*smooth(paper.x,.2,1.0))},handModes:{l:'chin',r:'tap'},tipBlend:1-workBlend,chinBlend:1-workBlend}};
 }

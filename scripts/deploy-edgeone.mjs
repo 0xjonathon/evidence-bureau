@@ -1,7 +1,7 @@
 // Deploys dist-eo/ to EdgeOne Pages. Run `npm run build:edgeone` first (this script does it for you).
 //
 //   edgeone login                      # once, in a terminal; or export EDGEONE_API_TOKEN
-//   npm run deploy:edgeone             # production deploy of project "evidence-bureau"
+//   npm run deploy:edgeone             # production deploy of project "evidence-bureau-demo"
 //   EB_PROJECT=name npm run deploy:edgeone
 //
 // Secrets are NOT uploaded by this script. Set them in the EdgeOne console (Project Settings > Environment
@@ -16,8 +16,8 @@ const run = (cmd, args, opts = {}) => spawnSync(cmd, args, {stdio: 'inherit', cw
 const build = run('node', ['scripts/build-edgeone.mjs']);
 if (build.status !== 0) process.exit(build.status ?? 1);
 
-const name = process.env.EB_PROJECT || 'evidence-bureau';
-const area = process.env.EB_AREA || 'global';
+const name = process.env.EB_PROJECT || 'evidence-bureau-demo';
+const area = process.env.EB_AREA || 'overseas';
 if (!['global', 'overseas'].includes(area)) throw new Error('EB_AREA must be global or overseas');
 const token = process.env.EDGEONE_API_TOKEN;
 const args = ['--yes', 'edgeone@1.6.46', 'makers', 'deploy', 'dist-eo', '-n', name, '-a', area, '--skip-ai-gateway-sync', ...(token ? ['-t', token] : [])];

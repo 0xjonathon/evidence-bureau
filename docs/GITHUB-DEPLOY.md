@@ -37,6 +37,8 @@ npm run build
 EB_PROJECT=evidence-bureau-demo EB_AREA=overseas npm run deploy:edgeone
 ```
 
-海外默认域名不使用三小时预览令牌，但中国大陆直连受平台区域限制；不能保证所有评委网络均可访问。原含大陆项目 evidence-bureau 仍保留，其默认预览链接仍有时效。
+海外默认域名不使用三小时预览令牌，但中国大陆直连受平台区域限制；不能保证所有评委网络均可访问。当前生产项目为 evidence-bureau-demo，默认发布命令也已指向该海外项目。旧参赛域名的访问恢复需要平台另行处理。
 
 浏览器物理引擎使用 vendor/rapier.js：EdgeOne 默认将 .mjs 作为二进制发送，严格模块校验会导致页面停在“事务所开灯中”。复制源仍为依赖包内的 rapier.mjs，发布文件必须保留 .js 扩展名。
+
+发布期间发现原 evidence-bureau 项目不在账户列表，CLI 自动生成了同名备用项目 makers-058nxpvvgfqq；它分配的是另一个域名，不代表原参赛链接恢复。评审入口仍使用上述 evidence-bureau-demo 地址。

@@ -31,3 +31,21 @@ test('a held pose stops solving after settling and cannot keep shivering at a fi
  assert.ok(maxStep<1e-5,`fixed targets continued rotating: ${maxStep} radians per frame`);
  assert.ok(Object.values(d.arms).every(a=>a.nativeSettled));
 });
+
+test('the actual stamp grasp clears the knob and shaft without leaving the hand floating away',async()=>{
+ const {simulateRuntime}=await import('./support/runtime-motion.mjs');
+ const {STAMP_CAP_Y,STAMP_CAP_RADIUS}=await import('../public/desk-performance.js');
+ const {V}=await import('../public/desk-layout.js');let frames=0;
+ await simulateRuntime('supported',{fps:40,onFrame:({actor,name,t,tool})=>{
+  if(name!=='result'||tool?.kind!=='stamp'||tool.weight<.999)return;
+  const origin=tool.actualPosition,cap=origin.clone().add(V(0,STAMP_CAP_Y,0));let gap=Infinity;
+  for(const{mesh,vertices}of actor.arms.l.surface)for(const i of vertices){
+   const p=V().fromBufferAttribute(mesh.geometry.attributes.position,i);mesh.applyBoneTransform(i,p).applyMatrix4(mesh.matrixWorld);
+   const clearance=p.distanceTo(cap)-STAMP_CAP_RADIUS;gap=Math.min(gap,clearance);
+   assert.ok(clearance>=-.0005,`stamp/${t}: finger skin enters the knob`);
+   const h=p.y-origin.y;if(h>.057&&h<.167){const radius=.028-(h-.057)/.11*.003;assert.ok(Math.hypot(p.x-origin.x,p.z-origin.z)>=radius-.0005,`stamp/${t}: finger skin enters the shaft`);}
+  }
+  assert.ok(gap<.012,`stamp/${t}: the hand detached from the handle`);frames++;
+ }});
+ assert.ok(frames>100);
+});

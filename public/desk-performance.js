@@ -1,7 +1,7 @@
 import {Quaternion} from 'three';
 import {V,STAMP_REST,PEN_REST,VISITOR_PEN,smooth,path} from './desk-layout.js';
 export function approachGrip(rest,point,weight){return rest.clone().lerp(point,weight).add(V(0,.10*Math.sin(weight*Math.PI),0));}
-export const STAMP_CAP_RADIUS=.035,STAMP_CAP_Y=.18,STAMP_GRIP_Y=.225;
+export const STAMP_CAP_RADIUS=.035,STAMP_CAP_Y=.18,STAMP_GRIP_Y=.232;
 export function stampGripNormal(weight=1){return V(-weight,1-weight,0).normalize();}
 export function stampGripPoint(position){return position.clone().add(V(0,STAMP_GRIP_Y,0));}
 export const MARK={seal:[240,520],cross:[[160,470],[320,580],[320,470],[160,580]],annotation:[20,290]};

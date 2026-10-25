@@ -19,7 +19,7 @@ export async function createOffice(container,onObject){
  renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
  renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.13;container.append(renderer.domElement);
  const scene=new THREE.Scene();scene.background=new THREE.Color('#14241f');scene.fog=new THREE.FogExp2('#14241f',.015);
- container.dataset.motionVersion='12';
+ container.dataset.motionVersion='12.1';
  const camera=new THREE.PerspectiveCamera(46,innerWidth/innerHeight,.06,70);
  scene.add(new THREE.HemisphereLight('#e5e9df','#233129',1.65));
  const key=new THREE.DirectionalLight('#ffe5c5',2.5);key.position.set(-3,6,5);key.castShadow=true;key.shadow.mapSize.set(2048,2048);Object.assign(key.shadow.camera,{left:-6,right:6,top:6,bottom:-4});key.shadow.normalBias=.008;scene.add(key);

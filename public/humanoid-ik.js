@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {SOLIDS} from './desk-layout.js';
+import {STAMP_CAP_Y,STAMP_CAP_RADIUS} from './desk-performance.js';
 const V=(x=0,y=0,z=0)=>new THREE.Vector3(x,y,z),Q=()=>new THREE.Quaternion();
 const clamp=THREE.MathUtils.clamp;
 function shoulderTwist(arm,local){const axis=arm.lower.position.clone().normalize(),r=arm.upperRest.clone().invert().multiply(local),v=V(r.x,r.y,r.z).dot(axis);let angle=2*Math.atan2(v,r.w);angle=Math.atan2(Math.sin(angle),Math.cos(angle));return angle;}
@@ -25,7 +26,7 @@ export function solveHumanoidArm(actor,arm,anchor,point,scale,{dt=.025,collision
   for(const{mesh,vertices}of arm.surface)for(let j=0;j<vertices.length;j+=2){const i=vertices[j],p=V().fromBufferAttribute(mesh.geometry.attributes.position,i);mesh.applyBoneTransform(i,p).applyMatrix4(mesh.matrixWorld);arm.collisionPads.push(arm.wrist.worldToLocal(p).multiply(scale));}
  }
 
- const inputs=[...shoulder.toArray(),...parent.toArray(),...anchor.toArray(),...grasp.toArray(),...preferred.toArray(),...arm.fingerAngles,a,b,Number(collision),...(arm.orientationGoal?.toArray()||[0,0,0,0]),flex];
+ const inputs=[...shoulder.toArray(),...parent.toArray(),...anchor.toArray(),...grasp.toArray(),...preferred.toArray(),...arm.fingerAngles,a,b,Number(collision),...(arm.toolCollider?.kind==='stamp'?arm.toolCollider.position.toArray():[0,0,0]),...(arm.orientationGoal?.toArray()||[0,0,0,0]),flex];
  if(arm.nativeSettled&&arm.nativeInput?.every((n,i)=>Math.abs(n-inputs[i])<1e-6))return arm.nativeResult;
  arm.nativeInput=inputs;
  function solveAt(direction){
@@ -43,6 +44,12 @@ export function solveHumanoidArm(actor,arm,anchor,point,scale,{dt=.025,collision
   result.error=result.contact.distanceTo(anchor);
   result.collision=collision?penetration(shoulder,result.elbow,.23)+penetration(result.elbow,result.wrist,.16):0;
   if(collision)for(const pad of arm.collisionPads){const p=pad.clone().applyQuaternion(result.hand).add(result.wrist);for(const s of SOLIDS){const depth=Math.min(...['x','y','z'].map(k=>s.size[k]/2-Math.abs(p[k]-s.p[k])));if(depth>-.001)result.collision+=Math.max(0,depth+.001)**2;}}
+  if(collision&&arm.toolCollider?.kind==='stamp'){
+   const origin=arm.toolCollider.position,cap=origin.clone().add(V(0,STAMP_CAP_Y,0));
+   for(const pad of arm.collisionPads){const p=pad.clone().applyQuaternion(result.hand).add(result.wrist),capDepth=Math.max(0,STAMP_CAP_RADIUS+.001-p.distanceTo(cap));result.collision+=8*capDepth*capDepth;
+    const height=p.y-origin.y;if(height>.057&&height<.167){const radius=.028-(height-.057)/.11*.003,depth=Math.max(0,radius+.001-Math.hypot(p.x-origin.x,p.z-origin.z));result.collision+=8*depth*depth;}
+   }
+  }
   result.twist=shoulderTwist(arm,parent.clone().invert().multiply(result.upper));
   result.cost=10000*result.collision;
   return result;
